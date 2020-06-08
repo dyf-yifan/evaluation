@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div></div>
+  <div><h1>Commit</h1></div>
 </template>
 
 <script>

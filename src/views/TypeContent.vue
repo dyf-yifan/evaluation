@@ -1,13 +1,9 @@
 <!--  -->
 <template>
   <div>
-    <h1>SurveyContent</h1>
-    <router-link to="/yiqing-module/survey-content/login-site"
-      >login-site</router-link
-    >
-    <router-link to="/yiqing-module/survey-content/create-module"
-      >create-module</router-link
-    >
+    <h1>TypeContent</h1>
+    <router-link to="/type-content/commit">commit</router-link>
+    <router-link to="/type-content/answer">answer</router-link>
     <router-view></router-view>
   </div>
 </template>

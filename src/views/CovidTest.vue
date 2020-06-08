@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div></div>
+  <div><h1>CovidTest</h1></div>
 </template>
 
 <script>

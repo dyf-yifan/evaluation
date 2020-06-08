@@ -1,6 +1,6 @@
-<!-- 新型冠状病毒防治统一考试 -->
+<!--  -->
 <template>
-  <div><h1>Covid</h1></div>
+  <div><h1>CreateModule</h1></div>
 </template>
 
 <script>
