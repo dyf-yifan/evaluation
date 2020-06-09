@@ -1,0 +1,344 @@
+.about {
+    width: 93%;
+    height: auto;
+}
+
+.d-container {
+    width: 100%;
+    height: 2000rpx;
+    background-color: rgb(248, 248, 248);
+}
+
+/* index */
+.swiper {
+    height: 350rpx;
+    width: 100%;
+}
+
+.swiper image {
+    height: 100%;
+    width: 100%;
+}
+
+.d-swiper-bottom {
+    width: 100%;
+    height: 170rpx;
+    border-bottom: 2px solid rgb(236, 232, 231);
+    display: flex;
+    color: rgb(143, 141, 141);
+    font-size: 32rpx;
+}
+
+.d-swiper-bottmom-icon {
+    width: 52%;
+    height: 55%;
+}
+
+.d-swiper-bottmom-iconl {
+    width: 40%;
+    height: 42%;
+}
+
+.d-center {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 课程 */
+.my-course {
+    padding-top: 10rpx;
+    width: 100%;
+    height: 270rpx;
+    border-bottom: 2px solid rgb(236, 232, 231);
+}
+
+.nine {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.nine-l {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.df {
+    padding-top: 10rpx;
+    display: flex;
+    height: 100%;
+}
+.d-df {
+    display: flex;
+}
+
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.course-name {
+    height: 30%;
+}
+
+.my-course-card {
+    padding-top: 10rpx;
+    width: 320rpx;
+    height: 68%;
+    margin-left: 10rpx;
+    background-color: rgb(161, 186, 230);
+    border-radius: 3%;
+}
+
+.my-course-location {
+    display: flex;
+    justify-content: space-between;
+    color: aliceblue;
+}
+
+.font-medium {
+    font-size: medium;
+    color: aliceblue;
+}
+
+/* 资讯 */
+.zixun {
+    padding-top: 10rpx;
+    width: 100%;
+}
+
+.zixun-box {
+    margin-top: 20rpx;
+    border-bottom: 1px solid rgb(236, 232, 231);
+    height: 180rpx;
+    width: 100%;
+    display: flex;
+}
+
+.zixun-img {
+    width: 30%;
+    height: 95%;
+    border-radius: 4%;
+    padding-bottom: 5%;
+}
+
+.zixun-content {
+    width: 70%;
+    height: 90%;
+    padding-left: 10rpx;
+}
+
+.zixun-title {
+    width: 100%;
+    height: 80%;
+    font-size: smaller;
+}
+
+.zixun-time {
+    width: 100%;
+    height: 20%;
+    color: gray;
+    font-size: x-small;
+}
+
+.ava-img {
+    border-radius: 50%;
+    width: 105rpx;
+    height: 105rpx;
+}
+
+.aval {
+    width: 25%;
+    height: 100%;
+}
+
+.ava-imgl {
+    border-radius: 50%;
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.d-mar {
+    margin: 0 auto;
+}
+
+.my-box {
+    width: 95%;
+    height: 200rpx;
+    background-color: #fff;
+    margin-top: -150rpx;
+    display: flex;
+}
+
+.d-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-bot {
+    display: flex;
+    align-items: flex-end;
+}
+.d-one {
+    display: flex;
+    justify-content: center;
+}
+
+.d-one2 {
+    display: flex;
+    align-items: center;
+}
+
+.d-one3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10rpx;
+    padding-right: 20rpx;
+}
+
+.my-name {
+    width: 70%;
+    height: 100%;
+}
+
+.cricle {
+    border-radius: 4%;
+}
+
+.nicheng {
+    width: 100%;
+    height: 80%;
+    font-size: medium;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.xuehao {
+    margin-top: 2%;
+    width: 100%;
+    height: 20%;
+    color: silver;
+    font-size: small;
+}
+
+.icon {
+    width: 55rpx;
+    height: 55rpx;
+}
+
+.lanmu {
+    width: 100%;
+    height: 100rpx;
+    background-color: #fff;
+    margin-top: 15rpx;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lanmul {
+    width: 100%;
+    height: 105rpx;
+    background-color: #fff;
+    display: flex;
+}
+
+.lanmu-content {
+    margin-left: 3%;
+    width: 87%;
+    height: 91%;
+}
+
+.iconl {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.lanmu-img {
+    width: 20%;
+    height: 100%;
+}
+
+.lanmu-name {
+    margin-left: 5%;
+    width: 60%;
+    height: 100%;
+    font-size: 30rpx;
+    color: rgb(117, 115, 115);
+}
+
+.ava {
+    width: 18%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.font-small {
+    font-size: small;
+}
+
+.font-icon {
+    font-size: 32rpx;
+}
+
+.you {
+    width: 10%;
+    height: 100%;
+}
+
+.icon2 {
+    width: 39rpx;
+    height: 39rpx;
+}
+
+.you-img {
+    width: 33rpx;
+    height: 33rpx;
+}
+
+.icon2-my {
+    width: 45rpx;
+    height: 45rpx;
+}
+
+.icon2-my {
+    width: 45rpx;
+    height: 45rpx;
+}
+
+.you-img-my {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.white {
+    background-color: #fff;
+}
+
+.mar-top {
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    font-size: small;
+    color: dimgray;
+}
+
+.login {
+    width: 85%;
+    height: 120rpx;
+}
+
+.login-input {
+    border-bottom: 1px solid gray;
+}
+
+.code-location {
+    margin-left: 59%;
+    margin-top: -50rpx;
+}
