@@ -7,5 +7,6 @@
 <style lang="scss">
 .router-link-active {
   text-decoration: none;
+  color: #828282;
 }
 </style>

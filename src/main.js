@@ -4,10 +4,20 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import { Button, Swipe, SwipeItem } from "vant";
-import { Lazyload } from "vant";
+import style from "../src/style/style.css";
+import {
+  Button,
+  Swipe,
+  SwipeItem,
+  Lazyload,
+  PullRefresh,
+  Pagination
+} from "vant";
 import { Image as VanImage } from "vant";
 
+Vue.use(Pagination);
+Vue.use(PullRefresh);
+Vue.use(style);
 Vue.use(VanImage);
 Vue.use(Lazyload);
 Vue.use(VueAxios, axios);

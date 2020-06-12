@@ -2,71 +2,39 @@
 <template>
   <div class="d-swipe">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" class="swipe-img" />
-      </van-swipe-item>
+      <router-link to="/covid">
+        <van-swipe-item>
+          <img :src="require('../assets/img1.jpg')" class="swipe-img" />
+        </van-swipe-item>
+      </router-link>
+      <router-link to="/yiqing-module">
+        <van-swipe-item>
+          <img :src="require('../assets/img2.jpg')" class="swipe-img"
+        /></van-swipe-item>
+      </router-link>
     </van-swipe>
     <div class="content">
       <div class="content-top mar df-center">
         <div class="all df-centerl">- 全部 -</div>
-        <div class="search df-centerl">
+        <router-link to="/search" class="a-style df-centerl">
           <i class="iconfont">&#xe617;</i>
           <span class="search-left">搜索</span>
-        </div>
+        </router-link>
       </div>
-      <div class="content-card mar">
-        <van-image
-          height="100"
-          radius="9"
-          src="https://source.unsplash.com/user/erondu/daily"
+      <div class="content-card mar" v-for="(item, index) in lists" :key="index">
+        <img
+          class="img-card"
+          @click="toListContent(item.list_id)"
+          :src="item.img"
         />
         <div class="img-z white-color">
+          <div class="title">{{ item.title }}</div>
           <div class="part">
-            1016人参与了
-          </div>
-          <div class="title">
-            2020民法典知识全国统一考试
-          </div>
-        </div>
-      </div>
-
-      <div class="content-card mar">
-        <van-image
-          height="100"
-          radius="9"
-          src="https://source.unsplash.com/user/erondu/daily"
-        />
-        <div class="img-z white-color">
-          <div class="part">
-            1016人参与了
-          </div>
-          <div class="title">
-            2020民法典知识全国统一考试
-          </div>
-        </div>
-      </div>
-
-      <div class="content-card mar">
-        <van-image
-          height="100"
-          radius="9"
-          src="https://source.unsplash.com/user/erondu/daily"
-        />
-        <div class="img-z white-color">
-          <div class="part">
-            1016人参与了
-          </div>
-          <div class="title">
-            2020民法典知识全国统一考试
+            {{ item.participate }}人参与了{{ item.list_id }}
           </div>
         </div>
       </div>
     </div>
-    <!-- <router-link to="/covid">covid</router-link>
-    <router-link to="/yiqing-module">yiqing-module</router-link>
-    <router-link to="/type-content">type-content</router-link>
-     -->
-    <router-view></router-view>
   </div>
 </template>
 
@@ -74,10 +42,9 @@
 export default {
   data() {
     return {
-      images: [
-        "https://p1.pstatp.com/large/pgc-image/4d7ab3a119b04958a86862e3342cd462",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQONQ2CGrbZ2Utu8pE0SCjrGvWYrgSHC4kT7EPikPMpQaYfeABI&usqp=CAU",
-      ],
+      currentPage: 1,
+      lists: [],
+      listId: null
     };
   },
   components: {},
@@ -86,31 +53,52 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  created() {
+    this.getLists();
+  },
+
+  methods: {
+    toListContent(listId) {
+      this.$router.push({
+        path: "/type-content",
+        query: { id: listId }
+      });
+    },
+    getLists() {
+      this.axios({
+        method: "POST",
+        url: "http://localhost:8080/api/list/home",
+        headers: {
+          "Content-Type": "Access-Control-Allow-Origin"
+        },
+        params: {}
+      }).then(res => {
+        this.lists = res.data.data;
+        // this.window.localStorage = res.data.data;
+        // console.log(window.localStorage);
+        this.listId = this.lists.list_id;
+        console.log(this.listId);
+        console.log(this.lists);
+      });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
-@font-face {
-  font-family: "iconfont"; /* project id 1445011 */
-  src: url("//at.alicdn.com/t/font_1445011_qct0siq58b.eot");
-  src: url("//at.alicdn.com/t/font_1445011_qct0siq58b.eot?#iefix")
-      format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_1445011_qct0siq58b.woff2") format("woff2"),
-    url("//at.alicdn.com/t/font_1445011_qct0siq58b.woff") format("woff"),
-    url("//at.alicdn.com/t/font_1445011_qct0siq58b.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_1445011_qct0siq58b.svg#iconfont") format("svg");
-}
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 14px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
-}
-.d-swipe {
-  width: 100%;
+.img-card {
+  width: 40%;
   height: 100%;
+  border-radius: 1px;
+  // position: absolute;
+  // clip: rect(0px 0x 150px 0px);
+}
+.a-style {
+  color: #828282;
+  width: 30%;
+  height: 57%;
+  border: 1px solid #e8e8e8;
+  font-size: 14px;
+  border-radius: 20px;
 }
 .my-swipe .van-swipe-item {
   color: #fff;
@@ -128,26 +116,8 @@ export default {
   z-index: 1;
   width: 100%;
   background-color: #fff;
-  margin-top: -10px;
+  margin-top: -14px;
   border-radius: 5%;
-}
-.df-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.df-centerl {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.mar {
-  margin: 0 auto;
-}
-.content-top {
-  width: 95%;
-  height: 50px;
-  color: #9c9c9c;
 }
 .all {
   width: 30%;
@@ -162,24 +132,23 @@ export default {
   font-size: 16px;
   border-radius: 20px;
 }
-.search-left {
-  margin-left: 5%;
-}
 .content-card {
-  margin-top: 12px;
-  height: 100px;
+  margin-top: 10px;
+  height: 150px;
   width: 95%;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQPESh5imoDB_Uh3CkeUxdnxvfyDzy-Z2q5Mq976ch2H1QdKiGM&usqp=CAU");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  // background: linear-gradient(to bottom right, #6e8b74, #f7f4ed);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .img-z {
-  width: 100%;
-  height: 50px;
+  width: 60%;
+  height: 60%;
   margin-left: 3%;
-  position: absolute;
-  z-index: 1;
-  margin-top: -46px;
-}
-.white-color {
-  color: #fff;
 }
 .part {
   width: 100%;
@@ -189,6 +158,6 @@ export default {
 .title {
   width: 100%;
   height: 70%;
-  font-size: 13px;
+  font-size: 15px;
 }
 </style>
