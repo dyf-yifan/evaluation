@@ -15,10 +15,12 @@ import {
   Cell,
   CellGroup
 } from "vant";
-
+import { Tab, Tabs } from "vant";
 import { Image as VanImage } from "vant";
 import { RadioGroup, Radio } from "vant";
 
+Vue.use(Tab);
+Vue.use(Tabs);
 Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Cell);

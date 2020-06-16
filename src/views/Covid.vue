@@ -1,27 +1,19 @@
 <!-- 新型冠状病毒防治统一考试 -->
 <template>
   <div>
-    <div class="home">
-      <div class="home-img">
+    <div>
+      <div>
         <img
           src="https://photonj.photo.store.qq.com/psc?/V10LAMgn2hjZo4/DkqUZ9iBKRJfSLPQfqcDxxV6Hg572RP.Ckm3aWweB5ZU5Q71ivgdBzM59hUWZ3W07rX0OxoeiAgsC6tO7TgG0g!!/b&bo=OwHRAAAAAAADEN4!&rf=viewer_311&t=5"
           alt=""
-          class="home-imgl"
         />
       </div>
-      <div class="task-home mar" v-for="(item, index) in covid" :key="index">
-        <div
-          class="task-question"
-          v-for="(type, index1) in item.typeList"
-          :key="index1"
-        >
-          <div v-if="type.status == 1">
+      <div>
+        <div v-for="(type, index1) in typeList" :key="index1">
+          <div v-if="type.status == 1" v-show="index1 == index">
             {{ type.question }}
-            <div
-              class="task-content"
-              v-for="(choice, index2) in type.choiceList"
-              :key="index2"
-            >
+
+            <div v-for="(choice, index2) in type.choiceList" :key="index2">
               <input
                 type="radio"
                 :name="type.homeTypeId"
@@ -30,13 +22,10 @@
             </div>
           </div>
 
-          <div v-if="type.status == 2">
+          <div v-if="type.status == 2" v-show="index1 == index">
             {{ type.question }}
-            <div
-              class="task-content"
-              v-for="(choice, index2) in type.choiceList"
-              :key="index2"
-            >
+
+            <div v-for="(choice, index2) in type.choiceList" :key="index2">
               <input type="checkBox" :value="choice.homeChoiceId" />{{
                 choice.content
               }}
@@ -45,7 +34,9 @@
         </div>
       </div>
     </div>
-    <button @click="getCode()">提交</button>
+    <button @click="top()" v-show="front">上一页</button>
+    <button @click="nest()" v-show="behind">下一页</button>
+    <button @click="getCode()" v-show="code">提交</button>
   </div>
 </template>
 
@@ -54,10 +45,14 @@ export default {
   data() {
     return {
       covid: [],
-      typeList: this.covid[0],
+      typeList: [],
       choiceList: [],
       radio: "1",
-      codeId: []
+      codeId: [],
+      index: 0,
+      front: false,
+      behind: true,
+      code: false
     };
   },
 
@@ -82,8 +77,24 @@ export default {
         params: {}
       }).then(res => {
         this.covid = res.data.data;
-        this.typeList = this.covid.typeList;
+        this.typeList = this.covid[0].typeList;
       });
+    },
+    nest() {
+      if (this.index == this.typeList.length - 1) {
+        this.behind = false;
+        this.code = true;
+      }
+      this.index++;
+      this.front = true;
+    },
+    top() {
+      if (this.index == 1) {
+        this.front = false;
+      }
+      this.index--;
+      this.behind = true;
+      this.code = false;
     },
     getCode() {
       var oTxt = document.getElementsByTagName("input");
@@ -106,32 +117,4 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-input {
-  outline: 0;
-}
-.task-question {
-  margin-top: 10px;
-  font-size: 16px;
-}
-.home-imgl {
-  width: 100%;
-  height: 150px;
-}
-.task-home {
-  margin-top: 10px;
-  height: auto;
-  width: 90%;
-}
-.task-content {
-  margin-top: 5px;
-  width: 100%;
-  height: auto;
-  min-height: 32px;
-  display: flex;
-  align-items: center;
-  border: 0.5px solid #e8e8e8;
-  border-radius: 5px;
-  font-size: 14px;
-}
-</style>
+<style lang="scss" scoped></style>

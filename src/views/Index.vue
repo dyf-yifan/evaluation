@@ -32,9 +32,7 @@
         />
         <div class="img-z white-color">
           <div class="title">{{ item.title }}</div>
-          <div class="part">
-            {{ item.participate }}人参与了{{ item.list_id }}
-          </div>
+          <div class="part">{{ item.participate }}人参与了</div>
         </div>
       </div>
     </div>
@@ -139,10 +137,6 @@ export default {
   border-radius: 3px;
   display: flex;
   align-items: center;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQPESh5imoDB_Uh3CkeUxdnxvfyDzy-Z2q5Mq976ch2H1QdKiGM&usqp=CAU");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  // background: linear-gradient(to bottom right, #6e8b74, #f7f4ed);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .img-z {
