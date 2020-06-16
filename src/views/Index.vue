@@ -4,7 +4,10 @@
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <router-link to="/covid">
         <van-swipe-item>
-          <img :src="require('../assets/img1.jpg')" class="swipe-img" />
+          <img
+            src="https://photonj.photo.store.qq.com/psc?/V10LAMgn2hjZo4/DkqUZ9iBKRJfSLPQfqcDxxV6Hg572RP.Ckm3aWweB5ZU5Q71ivgdBzM59hUWZ3W07rX0OxoeiAgsC6tO7TgG0g!!/b&bo=OwHRAAAAAAADEN4!&rf=viewer_311&t=5"
+            class="swipe-img"
+          />
         </van-swipe-item>
       </router-link>
       <router-link to="/yiqing-module">
@@ -74,10 +77,7 @@ export default {
         params: {}
       }).then(res => {
         this.lists = res.data.data;
-        // this.window.localStorage = res.data.data;
-        // console.log(window.localStorage);
         this.listId = this.lists.list_id;
-        console.log(this.listId);
         console.log(this.lists);
       });
     }

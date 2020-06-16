@@ -11,10 +11,18 @@ import {
   SwipeItem,
   Lazyload,
   PullRefresh,
-  Pagination
+  Pagination,
+  Cell,
+  CellGroup
 } from "vant";
-import { Image as VanImage } from "vant";
 
+import { Image as VanImage } from "vant";
+import { RadioGroup, Radio } from "vant";
+
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.use(Pagination);
 Vue.use(PullRefresh);
 Vue.use(style);
