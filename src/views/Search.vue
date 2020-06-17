@@ -33,7 +33,7 @@ export default {
       keywords: "",
       searchList: [],
       searchListLenght: "",
-      searchListShow:false
+      searchListShow: false
     };
   },
 
