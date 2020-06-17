@@ -15,6 +15,8 @@ export default {
 
   mounted() {},
 
+  created() {},
+
   methods: {}
 };
 </script>
