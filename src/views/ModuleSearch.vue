@@ -5,7 +5,7 @@
       <input
         v-model="keywords"
         type="text"
-        placeholder="搜索你最感兴趣的经典测评"
+        placeholder="搜索你最感兴趣的模板"
         class="search mar"
       />
     </div>
@@ -71,8 +71,6 @@ export default {
         this.moduleSearchList = res.data.data;
         this.searchListLenght = this.moduleSearchList.length;
         this.searchListShow = true;
-        // this.oneListLength = this.moduleSearchList.oneList.size;
-        // console.log(this.oneListLength);
         console.log(this.searchListLenght);
         console.log(this.moduleSearchList);
       });

@@ -87,8 +87,6 @@ export default {
   width: 40%;
   height: 100%;
   border-radius: 1px;
-  // position: absolute;
-  // clip: rect(0px 0x 150px 0px);
 }
 .a-style {
   color: #828282;

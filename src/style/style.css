@@ -28,10 +28,19 @@
     justify-content: space-between;
     align-items: center;
 }
-
+.df-centerll {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
 .df-centerl {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.d-one {
+    display: flex;
     align-items: center;
 }
 
