@@ -6,6 +6,26 @@
       :src="require('../assets/banner_plague.png')"
       alt="mkjn"
     />
+    <div class="fenxiang-img">
+      <a
+        href="javascript:void(0)"
+        onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+        ><img
+          class="fenxiang"
+          :src="require('../assets/fenxiang.png')"
+          alt="lalal"
+      /></a>
+      <div id="light" class="white_content">
+        <a
+          href="javascript:void(0)"
+          onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
+          >
+          <div class="close-img"><img class="close" :src="require('../assets/close.png')" alt=""
+        /></div></a>
+      </div>
+      <div id="fade" class="black_overlay"></div>
+    </div>
+
     <div class="content-top mar df-center">
       <div class="all df-centerl">- 全部 -</div>
       <router-link to="/yiqing-module/module-search" class="a-style df-centerl">
@@ -70,9 +90,57 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.close-img {
+  display: flex;
+  justify-content: flex-end;
+}
+.close {
+  width: 20px;
+  height: 20px;
+}
+.black_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: 0.7;
+  filter: alpha(opacity=88);
+}
+.white_content {
+  display: none;
+  position: absolute;
+  width: 75%;
+  height: 320px;
+  left: 50%;
+  right: 50%;
+  top: 25%;
+  margin-left: -120px;
+  border: 1px solid rgb(218, 213, 213);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}
+.fenxiang-img {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -122px;
+}
+.fenxiang {
+  width: 25px;
+  height: 26px;
+}
+.content-top {
+  margin-top: 95px;
+}
 .module-img {
   width: 100%;
-  height: 128px;
+  height: 120px;
 }
 .a-style {
   color: #828282;
@@ -90,9 +158,10 @@ export default {
   height: auto;
 }
 .module-card {
-  margin-top: 16px;
-  width: 45%;
+  margin-top: 9px;
+  width: 47%;
   height: 160px;
+  border-radius: 1%;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .module-bc {
@@ -103,11 +172,10 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  clip: rect(0px 144px 85px 0px);
+  clip: rect(0px 150px 85px 0px);
 }
 .module-content {
   padding-left: 1%;
-  // padding-right: 5%;
   width: 100%;
   height: 40%;
 }
@@ -125,14 +193,11 @@ export default {
   padding-bottom: 2%;
 }
 .module-part {
-  // width: 59%;
   height: 100%;
   font-size: 10px;
   color: rgb(184, 188, 190);
-  // padding-right: 2px;
 }
 .module-btn {
-  // width: 41%;
   height: 80%;
   font-size: 1px;
   background-color: #fff;
