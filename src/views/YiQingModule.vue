@@ -6,7 +6,7 @@
       :src="require('../assets/banner_plague.png')"
       alt="mkjn"
     />
-    <div class="fenxiang-img" @click="getQrCode()">
+    <div class="fenxiang-img">
       <a href="javascript:void(0)" @click="share()"
         ><img
           class="fenxiang"
@@ -90,7 +90,7 @@ export default {
   created() {
     this.getModule();
     this.longPress("light");
-    this.getQrCode();
+    // this.getQrCode();
   },
 
   methods: {
@@ -130,7 +130,7 @@ export default {
         },
         params: {}
       }).then(res => {
-        this.module = res.data.data;
+        let list = res.data.data;
         for (let i = 0; i < list.length; i++) {
           list[i].img = list[i].img + "?t=129094392478";
         }
@@ -355,7 +355,6 @@ export default {
   width: 53%;
   height: 35%;
   position: absolute;
-  // clip: auto;
   clip: rect(0px 150px 85px 0px);
 }
 .module-content {

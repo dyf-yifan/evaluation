@@ -24,16 +24,21 @@
           <span class="search-left">搜索</span>
         </router-link>
       </div>
-      <div class="content-card mar" v-for="(item, index) in lists" :key="index">
-        <img
-          class="img-card"
-          @click="toListContent(item.list_id)"
-          :src="item.img"
-        />
-        <div class="img-z white-color">
-          <div class="title">{{ item.title }}</div>
-          <div class="part">{{ item.participate }}人参与了</div>
-        </div>
+    </div>
+    <div
+      class="content-card mar"
+      @click="toListContent(item.list_id)"
+      v-for="(item, index) in lists"
+      :key="index"
+      v-bind:style="{
+        backgroundImage: 'url(' + item.img + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%'
+      }"
+    >
+      <div class="img-z white-color">
+        <div class="title">{{ item.title }}</div>
+        <div class="part">{{ item.participate }}人参与了</div>
       </div>
     </div>
   </div>
@@ -83,6 +88,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.clip-img {
+  height: 35%;
+  position: absolute;
+  clip: rect(0px 150px 85px 0px);
+}
 .img-card {
   width: 40%;
   height: 100%;
@@ -99,20 +109,16 @@ export default {
 .my-swipe .van-swipe-item {
   color: #fff;
   font-size: 20px;
-  height: 150px;
+  height: 140px;
   text-align: center;
   background-color: #39a9ed;
 }
 .swipe-img {
   width: 100%;
-  height: 150px;
+  height: 140px;
 }
 .content {
-  position: absolute;
-  z-index: 1;
   width: 100%;
-  background-color: #fff;
-  margin-top: -14px;
   border-radius: 5%;
 }
 .all {
@@ -129,18 +135,19 @@ export default {
   border-radius: 20px;
 }
 .content-card {
-  margin-top: 10px;
-  height: 150px;
-  width: 95%;
-  border-radius: 3px;
+  height: 125px;
+  margin-top: 12px;
+  width: 90%;
+  border-radius: 2%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .img-z {
-  width: 60%;
-  height: 60%;
-  margin-left: 3%;
+  width: 100%;
+  height: auto;
+  margin-left: 4%;
+  margin-bottom: 3%;
 }
 .part {
   width: 100%;

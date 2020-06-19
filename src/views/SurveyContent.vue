@@ -14,12 +14,12 @@
               v-for="(choice, index2) in type.list"
               :key="index2"
             >
-              <input
+              <!-- <input
                 type="radio"
                 :name="type.one_id"
                 :value="choice.homeChoiceId"
                 disabled="disabled"
-              />{{ choice.content }}
+              />{{ choice.content }} -->
             </div>
           </div>
 
@@ -27,12 +27,12 @@
             <div class="task-question">{{ type.question }}</div>
 
             <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
+              <!-- <input
                 type="radio"
                 :name="type.one_id"
                 :value="choice.homeChoiceId"
                 disabled="disabled"
-              />{{ choice.content }}
+              />{{ choice.content }} -->
             </div>
           </div>
 
@@ -40,22 +40,22 @@
             <div class="task-question">{{ type.question }}</div>
 
             <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
+              <!-- <input
                 type="checkBox"
                 :value="choice.homeChoiceId"
                 disabled="disabled"
-              />{{ choice.content }}
+              />{{ choice.content }} -->
             </div>
           </div>
           <div class="task-if" v-if="type.status == 3">
             <div class="task-question">{{ type.question }}</div>
             <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
+              <!-- <input
                 type="radio"
                 :name="type.one_id"
                 :value="choice.homeChoiceId"
                 disabled="disabled"
-              />{{ choice.content }}
+              />{{ choice.content }} -->
             </div>
           </div>
         </div>
