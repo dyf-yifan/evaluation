@@ -9,16 +9,19 @@ import {
   Button,
   Swipe,
   SwipeItem,
-  Lazyload,
   PullRefresh,
   Pagination,
   Cell,
-  CellGroup
+  CellGroup,
+  Skeleton,
+  Tab,
+  Tabs,
+  Image as VanImage,
+  RadioGroup,
+  Radio
 } from "vant";
-import { Tab, Tabs } from "vant";
-import { Image as VanImage } from "vant";
-import { RadioGroup, Radio } from "vant";
 
+Vue.use(Skeleton);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Radio);
@@ -29,7 +32,6 @@ Vue.use(Pagination);
 Vue.use(PullRefresh);
 Vue.use(style);
 Vue.use(VanImage);
-Vue.use(Lazyload);
 Vue.use(VueAxios, axios);
 Vue.use(Button);
 Vue.use(Swipe);

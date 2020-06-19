@@ -1,27 +1,29 @@
 <!-- 疫情防控专题模板 -->
 <template>
-  <div class="container">
+  <div class="container" id="capture">
     <img
       class="module-img"
       :src="require('../assets/banner_plague.png')"
       alt="mkjn"
     />
-    <div class="fenxiang-img">
-      <a
-        href="javascript:void(0)"
-        onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+    <div class="fenxiang-img" @click="getQrCode()">
+      <a href="javascript:void(0)" @click="share()"
         ><img
           class="fenxiang"
           :src="require('../assets/fenxiang.png')"
           alt="lalal"
       /></a>
       <div id="light" class="white_content">
-        <a
-          href="javascript:void(0)"
-          onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
-          >
-          <div class="close-img"><img class="close" :src="require('../assets/close.png')" alt=""
-        /></div></a>
+        >
+        <a href="javascript:void(0)" @click="close()">
+          <div class="close-img">
+            <img
+              class="close"
+              :src="require('../assets/close.png')"
+              alt=""
+            /></div
+        ></a>
+        <img v-bind:src="imgUrl" class="er-img" alt="" />
       </div>
       <div id="fade" class="black_overlay"></div>
     </div>
@@ -34,9 +36,19 @@
       </router-link>
     </div>
     <div class="df">
-      <div class="module-card mar" v-for="(item, index) in module" :key="index">
+      <div
+        class="module-card mar"
+        @click="toListContent(item.list_id)"
+        v-for="(item, index) in module"
+        :key="index"
+      >
         <div class="module-bc">
-          <img :src="item.img" alt="" class="clip-img" />
+          <img
+            :src="item.img"
+            alt=""
+            class="clip-img"
+            crossorigin="anonymous"
+          />
         </div>
         <div class="module-content">
           <div class="module-title mar d-one">{{ item.title }}</div>
@@ -53,12 +65,19 @@
     </div>
   </div>
 </template>
-
+<script type="text/javascript" src="html2canvas.js"></script>
 <script>
+import html2canvas from "html2canvas";
+// Vue.filter("format", function(value) {
+//   return value + "?t=129094392478";
+// });
 export default {
   data() {
     return {
       module: [],
+      background: "white",
+      base64: "",
+      imgUrl: ""
     };
   },
 
@@ -70,26 +89,190 @@ export default {
 
   created() {
     this.getModule();
+    this.longPress("light");
+    this.getQrCode();
   },
 
   methods: {
+    toListContent(listId) {
+      this.$router.push({
+        path: "/yiqing-module/survey-content",
+        query: { id: listId }
+      });
+    },
+    img2base64(url, crossOrigin) {
+      return new Promise(resolve => {
+        const img = new Image();
+
+        img.onload = () => {
+          const c = document.createElement("canvas");
+
+          c.width = img.naturalWidth;
+          c.height = img.naturalHeight;
+
+          const cxt = c.getContext("2d");
+
+          cxt.drawImage(img, 0, 0);
+          // 得到图片的base64编码数据
+          resolve(c.toDataURL("image/png"));
+        };
+
+        crossOrigin && img.setAttribute("crossOrigin", crossOrigin);
+        img.src = url;
+      });
+    },
     getModule() {
       this.axios({
         method: "POST",
         url: "http://localhost:8080/api/list/special",
         headers: {
-          "Content-Type": "Access-Control-Allow-Origin",
+          "Content-Type": "Access-Control-Allow-Origin"
         },
-        params: {},
-      }).then((res) => {
+        params: {}
+      }).then(res => {
         this.module = res.data.data;
+        for (let i = 0; i < list.length; i++) {
+          list[i].img = list[i].img + "?t=129094392478";
+        }
+        this.module = list;
         console.log(this.module);
       });
     },
-  },
+    share() {
+      html2canvas(document.getElementById("capture")).then(function(canvas) {
+        let capture = document.getElementById("capture").style;
+        let light = document.getElementById("light").style;
+        light.display = "block";
+        light.backgroundImage = "url(" + canvas.toDataURL("image/png") + ")";
+        light.backgroundRepeat = "no-repeat";
+        light.backgroundSize = "100% 100%";
+        // console.log(canvas.toDataURL("image/png"));
+        document.getElementById("fade").style.display = "block";
+        // console.log(canvas.toDataURL("image/png"));
+      }, this.getQrCode());
+
+      // alert(this.$route.path)
+      // alert(window.location.href)
+    },
+    close() {
+      document.getElementById("light").style.display = "none";
+      document.getElementById("fade").style.display = "none";
+    },
+    base64ToBlob(urlData) {
+      var arr = urlData.split(",");
+      var mime = arr[0].match(/:(.*?);/)[1] || "image/png";
+      // 去掉url的头，并转化为byte
+      var bytes = window.atob(arr[1]);
+      // 处理异常,将ascii码小于0的转换为大于0
+      var ab = new ArrayBuffer(bytes.length);
+      // 生成视图（直接针对内存）：8位无符号整数，长度1个字节
+      var ia = new Uint8Array(ab);
+
+      for (var i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i);
+      }
+
+      return new Blob([ab], {
+        type: mime
+      });
+    },
+    getQrCode() {
+      this.axios({
+        method: "POST",
+        url: "http://localhost:8080/api/code/QrCode",
+        headers: {
+          "Content-Type": "Access-Control-Allow-Origin"
+        },
+        params: {
+          content: window.location.href
+        }
+      }).then(res => {
+        this.imgUrl = res.data.data;
+        console.log(this.imgUrl);
+      });
+    },
+    //因js没有长按事件，需要自行封装，函数名longPress，参数为：需长按元素的id、长按之后的逻辑函数func
+    longPress(id) {
+      var timeOutEvent;
+
+      document
+        .querySelector("#" + id)
+        .addEventListener("touchstart", function(e) {
+          //开启定时器前先清除定时器，防止重复触发
+          clearTimeout(timeOutEvent);
+          //开启延时定时器
+          timeOutEvent = setTimeout(function() {
+            //调用长按之后的逻辑函数func
+            this.func();
+          }, 300); //长按时间为300ms，可以自己设置
+        });
+
+      document
+        .querySelector("#" + id)
+        .addEventListener("touchmove", function(e) {
+          //长按过程中，手指是不能移动的，若移动则清除定时器，中断长按逻辑
+          clearTimeout(timeOutEvent);
+          /* e.preventDefault() --> 若阻止默认事件，则在长按元素上滑动时，页面是不滚动的，按需求设置吧 */
+        });
+
+      document
+        .querySelector("#" + id)
+        .addEventListener("touchend", function(e) {
+          //若手指离开屏幕，时间小于我们设置的长按时间，则为点击事件，清除定时器，结束长按逻辑
+          clearTimeout(timeOutEvent);
+        });
+    },
+
+    //保存图片
+    saveSharePic() {
+      // 想要保存的图片节点
+      const dom = document.getElementById("light");
+      // 创建一个新的canvas
+      const canvas = document.createElement("canvas");
+      const width = document.body.offsetWidth; // 可见屏幕的宽
+      const height = document.body.offsetHeight; // 可见屏幕的高
+      console.log(
+        "可见屏幕宽高：" +
+          document.body.offsetWidth +
+          "、" +
+          document.body.offsetHeight
+      );
+      const scale = window.devicePixelRatio; // 设备的devicePixelRatio
+      // 将Canvas画布放大scale倍，然后放在小的屏幕里，解决模糊问题
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      console.log("canvas宽高：" + canvas.width + "、" + canvas.height);
+      canvas.getContext("2d").scale(scale, scale);
+      // dom节点绘制成canvas
+      html2canvas(dom).then(function(canvas) {
+        const img = canvas2Image(canvas, canvas.width, canvas.height);
+        img.style.cssText =
+          "width:100%;position:absolute;top:0;left:0;opacity:0;z-index:999;";
+        console.log("图片宽高：" + img.width + "、" + img.height);
+        document.body.appendChild(img);
+      });
+    },
+
+    //利用canvas获取图片的base64编码创建图片对象
+    canvas2Image(canvas, width, height) {
+      const retCanvas = document.createElement("canvas");
+      const retCtx = retCanvas.getContext("2d");
+      retCanvas.width = width;
+      retCanvas.height = height;
+      retCtx.drawImage(canvas, 0, 0, width, height, 0, 0, width, height);
+      const img = document.createElement("img");
+      img.src = retCanvas.toDataURL("image/png", 1); // 可以根据需要更改格式
+      return img;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
+.er-img {
+  width: 20%;
+  height: 50px;
+  margin-top: 15%;
+}
 .close-img {
   display: flex;
   justify-content: flex-end;
@@ -115,7 +298,7 @@ export default {
   display: none;
   position: absolute;
   width: 75%;
-  height: 320px;
+  height: 350px;
   left: 50%;
   right: 50%;
   top: 25%;
@@ -169,9 +352,10 @@ export default {
   height: 60%;
 }
 .clip-img {
-  width: 100%;
-  height: 100%;
+  width: 53%;
+  height: 35%;
   position: absolute;
+  // clip: auto;
   clip: rect(0px 150px 85px 0px);
 }
 .module-content {
@@ -204,5 +388,9 @@ export default {
   border: 1px solid rgb(140, 196, 253);
   color: rgb(140, 196, 253);
   border-radius: 3%;
+}
+.container {
+  width: 320px;
+  height: 568px;
 }
 </style>
