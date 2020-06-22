@@ -18,9 +18,11 @@ import {
   Tabs,
   Image as VanImage,
   RadioGroup,
-  Radio
+  Radio,
+  Toast
 } from "vant";
 
+Vue.use(Toast);
 Vue.use(Skeleton);
 Vue.use(Tab);
 Vue.use(Tabs);

@@ -60,7 +60,7 @@ export default {
     moduleSerach() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/list/special/keywords",
+        url: "http://120.26.70.42:8080/api/list/special/keywords",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },

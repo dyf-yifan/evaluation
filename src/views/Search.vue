@@ -51,7 +51,7 @@ export default {
     serach() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/list/home/keywords",
+        url: "http://120.26.70.42:8080/api/list/home/keywords",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },

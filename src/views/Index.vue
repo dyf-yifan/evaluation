@@ -5,8 +5,8 @@
       <router-link to="/covid">
         <van-swipe-item>
           <img
-            src="https://photonj.photo.store.qq.com/psc?/V10LAMgn2hjZo4/DkqUZ9iBKRJfSLPQfqcDxxV6Hg572RP.Ckm3aWweB5ZU5Q71ivgdBzM59hUWZ3W07rX0OxoeiAgsC6tO7TgG0g!!/b&bo=OwHRAAAAAAADEN4!&rf=viewer_311&t=5"
-            class="swipe-img"
+            src="https://cdn1.wenjuan.com/5e342724a320fc092a7707e9_lib_thumbnail_1580486452.png"
+            class="swipe-imgl"
           />
         </van-swipe-item>
       </router-link>
@@ -73,7 +73,7 @@ export default {
     getLists() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/list/home",
+        url: "http://120.26.70.42:8080/api/list/home",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
@@ -88,6 +88,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.swipe-imgl {
+  clip: rect(0px 150px 85px 0px);
+}
 .clip-img {
   height: 35%;
   position: absolute;

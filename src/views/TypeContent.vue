@@ -84,7 +84,7 @@ export default {
     getListsContent() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/list/" + this.id,
+        url: "http://120.26.70.42:8080/api/list/" + this.id,
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
@@ -164,6 +164,6 @@ input {
 }
 .task-question {
   width: 100%;
-  font-size: 50px;
+  font-size: 20px;
 }
 </style>

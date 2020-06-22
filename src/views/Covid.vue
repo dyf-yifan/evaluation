@@ -18,6 +18,7 @@
                 type="radio"
                 :name="type.homeTypeId"
                 :value="choice.homeChoiceId"
+                @click="getCode(index1, choice.homeChoiceId)"
               />{{ choice.content }}
             </div>
           </div>
@@ -26,9 +27,11 @@
             {{ type.question }}
 
             <div v-for="(choice, index2) in type.choiceList" :key="index2">
-              <input type="checkBox" :value="choice.homeChoiceId" />{{
-                choice.content
-              }}
+              <input
+                type="checkBox"
+                :name="type.homeTypeId"
+                :value="choice.homeChoiceId"
+              />{{ choice.content }}
             </div>
           </div>
         </div>
@@ -70,7 +73,7 @@ export default {
     getCovid() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/home/",
+        url: "http://120.26.70.42:8080/api/home/",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
@@ -81,12 +84,14 @@ export default {
       });
     },
     nest() {
-      if (this.index == this.typeList.length - 1) {
-        this.behind = false;
-        this.code = true;
+      if (this.codeId[this.index] != null) {
+        if (this.index == this.typeList.length - 1) {
+          this.behind = false;
+          this.code = true;
+        }
+        this.index++;
+        this.front = true;
       }
-      this.index++;
-      this.front = true;
     },
     top() {
       if (this.index == 1) {
@@ -96,20 +101,21 @@ export default {
       this.behind = true;
       this.code = false;
     },
-    getCode() {
-      var oTxt = document.getElementsByTagName("input");
-      var tem = 0;
-      for (var i = 0; i < oTxt.length; i++) {
-        if (oTxt[i].checked) {
-          this.codeId[tem] = oTxt[i].value;
-          tem++;
-        }
-      }
+    getCode(index, value) {
+      this.codeId[index] = value;
+      // var oTxt = document.getElementsByTagName("input");
+      // var tem = 0;
+      // for (var i = 0; i < oTxt.length; i++) {
+      //   if (oTxt[i].checked) {
+      //     this.codeId[tem] = oTxt[i].value;
+      //     tem++;
+      //   }
+      // }
       this.getResult();
     },
     getResult() {
       this.axios
-        .post("http://localhost:8080/api/homeChoice/result", this.codeId)
+        .post("http://120.26.70.42:8080/api/homeChoice/result", this.codeId)
         .then(res => {
           alert(res.data.data);
         });

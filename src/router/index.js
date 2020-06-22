@@ -4,7 +4,6 @@ import Index from "../views/Index.vue";
 import False from "../views/False.vue";
 import Covid from "../views/Covid.vue";
 import Search from "../views/Search.vue";
-import Meng from "../views/Meng.vue";
 
 Vue.use(VueRouter);
 
@@ -68,11 +67,6 @@ const routes = [
     path: "*",
     name: "False",
     component: False
-  },
-  {
-    path: "/meng",
-    name: "Meng",
-    component: Meng
   }
 ];
 
