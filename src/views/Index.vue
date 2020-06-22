@@ -88,9 +88,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.swipe-imgl {
-  clip: rect(0px 150px 85px 0px);
-}
 .clip-img {
   height: 35%;
   position: absolute;

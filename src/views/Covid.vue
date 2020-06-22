@@ -4,8 +4,8 @@
     <div>
       <div>
         <img
-          src="https://photonj.photo.store.qq.com/psc?/V10LAMgn2hjZo4/DkqUZ9iBKRJfSLPQfqcDxxV6Hg572RP.Ckm3aWweB5ZU5Q71ivgdBzM59hUWZ3W07rX0OxoeiAgsC6tO7TgG0g!!/b&bo=OwHRAAAAAAADEN4!&rf=viewer_311&t=5"
-          alt=""
+          src="https://cdn1.wenjuan.com/5e342724a320fc092a7707e9_lib_thumbnail_1580486452.png"
+          class="swipe-imgl"
         />
       </div>
       <div>
