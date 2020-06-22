@@ -1,6 +1,7 @@
 <!-- 疫情防控专题模板 -->
 <template>
   <div class="container" id="capture">
+    <i class="iconfont" @click="goBack()">&#xe609;</i>
     <img
       class="module-img"
       :src="require('../assets/banner_plague.png')"
@@ -93,6 +94,9 @@ export default {
   },
 
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     toListContent(listId) {
       this.$router.push({
         path: "/yiqing-module/survey-content",

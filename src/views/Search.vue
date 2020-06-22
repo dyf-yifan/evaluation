@@ -1,6 +1,7 @@
 <!--  -->
 <template>
   <div class="container">
+    <i class="iconfont" @click="goBack()">&#xe609;</i>
     <div class="search-top">
       <img class="search-img" :src="require('../assets/sousuo.png')" alt="" />
       <input
@@ -48,6 +49,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     serach() {
       this.axios({
         method: "POST",

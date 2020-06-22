@@ -1,5 +1,6 @@
 <template>
   <div class="container mar">
+    <i class="iconfont" @click="goBack()">&#xe609;</i>
     <div class="task-home">
       <div
         class="task mar-top"
@@ -81,6 +82,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     getListsContent() {
       this.axios({
         method: "POST",

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container mar">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
       <div class="task-home">
         <div
           class="task mar-top"
@@ -94,6 +95,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     toCreateModule(id) {
       this.$router.push({
         path: "/yiqing-module/survey-content/create-module",
@@ -122,7 +126,7 @@ export default {
         this.questions = this.question;
         console.log(this.questions);
       });
-    },
+    }
     // set() {
     //   alert(this.$route.params.id);
     // }
@@ -130,16 +134,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.height-btnl {
-  height: 36px;
-  width: 55%;
-  border-radius: 5%;
-  font-size: 13px;
-}
-.height-btn {
-  height: 34px;
-  border-radius: 5%;
-}
 .container {
   width: 85%;
 }
@@ -164,19 +158,5 @@ input {
   width: 100%;
   height: auto;
   font-size: 15px;
-}
-.fix {
-  border-top: 2px solid rgb(243, 241, 241);
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  background-color: #fff;
-}
-.fixed {
-  width: 100%;
-  position: fixed;
-  height: 100%;
-  top: 510px;
 }
 </style>

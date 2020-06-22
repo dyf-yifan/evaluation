@@ -2,17 +2,17 @@
 <template>
   <div>
     <div>
-      <div>
+      <!-- <div>
         <img
           src="https://cdn1.wenjuan.com/5e342724a320fc092a7707e9_lib_thumbnail_1580486452.png"
           class="swipe-imgl"
         />
-      </div>
+      </div> -->
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
       <div>
         <div v-for="(type, index1) in typeList" :key="index1">
           <div v-if="type.status == 1" v-show="index1 == index">
             {{ type.question }}
-
             <div v-for="(choice, index2) in type.choiceList" :key="index2">
               <input
                 type="radio"
@@ -70,6 +70,9 @@ export default {
   },
 
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     getCovid() {
       this.axios({
         method: "POST",
@@ -84,6 +87,10 @@ export default {
       });
     },
     nest() {
+      this.$toast({
+        message: "请选择一个选项",
+        position: "top"
+      });
       if (this.codeId[this.index] != null) {
         if (this.index == this.typeList.length - 1) {
           this.behind = false;

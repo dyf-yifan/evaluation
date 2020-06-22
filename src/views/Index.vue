@@ -64,6 +64,9 @@ export default {
   },
 
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     toListContent(listId) {
       this.$router.push({
         path: "/type-content",

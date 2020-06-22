@@ -1,5 +1,6 @@
 <template>
   <div class="conteiner">
+    <i class="iconfont" @click="goBack()">&#xe609;</i>
     <div class="c-container mar">
       <div class="c-title">项目标题</div>
       <div class="c-huanl c-l">
@@ -16,36 +17,59 @@
       </div>
 
       <div class="c-title">题目</div>
-
-      <div
-        class="c-huanl c-ll"
-        v-for="(item1, index1) in question"
-        :key="index1"
-      >
-        <div class="d-right">
-          <i class="iconfont" @click="show(index1)">&#xe61c;</i>
-          <div class="xuan" v-show="showXuan == index1 && showXuan1">
-            <div class="xuanl"><i class="iconfont">&#xe692;</i> 上移</div>
-            <div class="xuanl"><i class="iconfont">&#xe619;</i> 下移</div>
-            <div class="xuanl"><i class="iconfont">&#xe603;</i> 删除</div>
+      <div class="top">
+        <div
+          class="c-huanl c-ll"
+          v-for="(item1, index1) in question"
+          :key="index1"
+        >
+          <div class="d-right">
+            <i class="iconfont" @click="show(index1)">&#xe61c;</i>
+            <div class="xuan" v-show="showXuan == index1 && showXuan1">
+              <div class="xuanl" @click="top(index1)">
+                <i class="iconfont">&#xe692;</i> 上移
+              </div>
+              <div class="xuanl" @click="under(index1)">
+                <i class="iconfont">&#xe619;</i> 下移
+              </div>
+              <div class="xuanl" @click="remove(index1)">
+                <i class="iconfont">&#xe603;</i> 删除
+              </div>
+            </div>
+          </div>
+          <div v-if="item1.status == 1">
+            <div class="c-questionl">
+              {{ item1.question }}
+            </div>
+            <div
+              class="c-hu"
+              v-for="(item2, index2) in item1.list"
+              :key="index2"
+            >
+              <i class="iconfont">&#xe67f;</i>
+              {{ item2.content }}
+            </div>
+          </div>
+          <div v-if="item1.status == 2">
+            <div class="c-questionl">
+              {{ item1.question }}
+            </div>
+            <div
+              class="c-hu"
+              v-for="(item2, index2) in item1.list"
+              :key="index2"
+            >
+              <i class="iconfont">&#xe994;</i>
+              {{ item2.content }}
+            </div>
           </div>
         </div>
-        <div v-if="item1.status == 1">
-          <div class="c-questionl">
-            {{ item1.question }}
-          </div>
-          <div class="c-hu" v-for="(item2, index2) in item1.list" :key="index2">
-            <i class="iconfont">&#xe67f;</i>
-            {{ item2.content }}
-          </div>
-        </div>
-        <div v-if="item1.status == 2">
-          <div class="c-questionl">
-            {{ item1.question }}
-          </div>
-          <div class="c-hu" v-for="(item2, index2) in item1.list" :key="index2">
-            <i class="iconfont">&#xe994;</i>
-            {{ item2.content }}
+        <div class="fixed">
+          <div class="fix">
+            <van-button class="height-btnl" @click="toSuccessTip" type="info"
+              >发布</van-button
+            >
+            <van-button class="height-btn" plain type="info">更多</van-button>
           </div>
         </div>
       </div>
@@ -61,7 +85,7 @@ export default {
       id: this.$route.query.id,
       question: [],
       showXuan: "",
-      showXuan1: false,
+      showXuan1: false
     };
   },
 
@@ -76,15 +100,25 @@ export default {
   },
 
   methods: {
+    // 成功提示
+    toSuccessTip() {
+      this.$toast.success({
+        message: "发布成功"
+      });
+    },
+
+    goBack() {
+      window.history.go(-1);
+    },
     getListsContent() {
       this.axios({
         method: "POST",
         url: "http://120.26.70.42:8080/api/list/" + this.id,
         headers: {
-          "Content-Type": "Access-Control-Allow-Origin",
+          "Content-Type": "Access-Control-Allow-Origin"
         },
-        params: {},
-      }).then((res) => {
+        params: {}
+      }).then(res => {
         this.listsContent = res.data.data;
         this.question = this.listsContent.oneList;
         console.log(this.listsContent);
@@ -98,10 +132,50 @@ export default {
         this.showXuan1 = true;
       }
     },
-  },
+    under(index) {
+      if (index + 1 === this.question.length) {
+        //弹出框，提示不能在向下了
+      } else {
+        let tem = this.question[index];
+        this.question[index] = this.question[index + 1];
+        this.question[index + 1] = tem;
+        this.showXuan1 = false;
+      }
+    },
+    top(index) {
+      if (index === 0) {
+        //弹出框，提示不能在向上了
+      } else {
+        let tem = this.question[index];
+        this.question[index] = this.question[index - 1];
+        this.question[index - 1] = tem;
+        this.showXuan1 = false;
+      }
+    },
+    remove(index) {
+      this.question.splice(index, 1);
+      this.showXuan1 = false;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
+.top {
+  margin-bottom: 100px;
+}
+.fixl {
+  border-bottom: 2px solid rgb(243, 241, 241);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+}
+
+.fixedl {
+  width: 100%;
+  position: fixed;
+}
 .xuan {
   position: absolute;
   width: 90px;
