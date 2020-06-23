@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'iconfont';
     /* project id 1445011 */
-    src: url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.eot');
-    src: url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.eot?#iefix') format('embedded-opentype'),
-        url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.woff2') format('woff2'),
-        url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.woff') format('woff'),
-        url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.ttf') format('truetype'),
-        url('//at.alicdn.com/t/font_1445011_80c8j7qifqy.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_1445011_2keficn87sd.eot');
+    src: url('//at.alicdn.com/t/font_1445011_2keficn87sd.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1445011_2keficn87sd.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1445011_2keficn87sd.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1445011_2keficn87sd.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1445011_2keficn87sd.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -21,9 +21,11 @@
 .swipe-imgl {
     clip: rect(0px 150px 85px 0px);
 }
+
 .icon-blue {
     color: #1E90FF;
 }
+
 .c-huanl {
     width: 90%;
     height: auto;
@@ -36,6 +38,17 @@
     color: #4f4f4f;
     box-shadow: 0 4px 8px 0 rgba(41, 35, 35, 0.2),
         0 6px 20px 0 rgba(107, 96, 96, 0.19);
+}
+.c-huanla {
+    width: 90%;
+    height: auto;
+    background-color: #fff;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    margin-top: 4%;
+    font-size: 15px;
+    color: #4f4f4f;
 }
 
 .c-l {
@@ -136,4 +149,35 @@
     padding-bottom: 1%;
     padding-top: 2%;
     border-radius: 5px;
+}
+
+.edit {
+    width: 100%;
+    height: auto;
+}
+
+.edit-question {
+    width: 90%;
+    height: auto;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    font-size: 15px;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.edit-answer {
+    padding-bottom: 2%;
+    padding-top: 3%;
+    width: 90%;
+    height: auto;
+    font-size: 13px;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.edit-xuan {
+    display: flex;
+    color: #1E90FF;
+    justify-content: space-around;
+    /* border-bottom: 1px solid #cfcfcf; */
+    font-size: 14px;
 }

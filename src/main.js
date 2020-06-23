@@ -21,9 +21,11 @@ import {
   Radio,
   Toast,
   Search,
-  Overlay
+  Overlay,
+  Field
 } from "vant";
 
+Vue.use(Field);
 Vue.use(Overlay);
 Vue.use(Search);
 Vue.use(Toast);

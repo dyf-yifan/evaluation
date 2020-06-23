@@ -52,7 +52,7 @@ export default {
 }
 .m-card {
   margin-top: 10px;
-  width: 93%;
+  width: 91%;
   height: 120px;
   box-shadow: 0 2px 5px 2px rgba(41, 35, 35, 0.2),
     1px 6px 5px 1px rgba(107, 96, 96, 0.19);
@@ -60,7 +60,7 @@ export default {
 .m-title {
   width: 100%;
   height: 30%;
-  font-size: 18px;
+  font-size: 17px;
   color: #4f4f4f;
 }
 .m-middle {
@@ -71,7 +71,7 @@ export default {
 .m-bottom {
   width: 100%;
   height: 40%;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #828282;
 }
 .m-middle-l {

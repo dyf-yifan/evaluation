@@ -1,19 +1,25 @@
 <!-- 新型冠状病毒防治统一考试 -->
 <template>
   <div>
-    <div>
-      <div>
+    <img :src="require('../assets/test.png')" class="test-img" />
+    <div class="task-home mar">
+      <div class="task">
         <div v-for="(type, index1) in typeList" :key="index1">
           <div v-if="type.status == 1" v-show="index1 == index">
-            {{ type.question }}
-
-            <div v-for="(choice, index2) in type.choiceList" :key="index2">
+            <div class="task-question">{{ type.question }}</div>
+            <div
+              class="task-answer"
+              v-for="(choice, index2) in type.choiceList"
+              :key="index2"
+            >
               <input
+                class="inputl"
                 type="radio"
                 :name="type.homeTypeId"
                 :value="choice.homeChoiceId"
                 @click="getCode(index1, choice.homeChoiceId)"
-              />{{ choice.content }}
+              />
+              {{ choice.content }}
             </div>
           </div>
 
@@ -31,10 +37,14 @@
           </div>
         </div>
       </div>
+      <van-button type="info" @click="top()" v-show="front">上一页</van-button>
+      <van-button type="info" @click="nest()" v-show="behind"
+        >下一页</van-button
+      >
+      <van-button type="info" @click="getResult()" v-show="code"
+        >提交</van-button
+      >
     </div>
-    <button @click="top()" v-show="front">上一页</button>
-    <button @click="nest()" v-show="behind">下一页</button>
-    <button @click="getResult()" v-show="code">提交</button>
   </div>
 </template>
 
@@ -151,4 +161,47 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.test-img {
+  width: 100%;
+  height: 190px;
+}
+.task-home {
+  width: 90%;
+  height: auto;
+}
+.task {
+  width: 100%;
+  height: auto;
+}
+.task-question {
+  margin-top: 5%;
+  font-size: 16px;
+}
+.task-answer {
+  font-size: 14px;
+  border: 0.5px solid #e8e8e8;
+  margin-top: 2.5%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  border-radius: 1%;
+  padding-left: 3%;
+}
+// input {
+//   display: none;
+// }
+.inputl {
+  width: 20px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 50%;
+  position: relative;
+}
+.inputl:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+</style>

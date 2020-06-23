@@ -6,7 +6,6 @@
       <div class="c-huanl c-l">
         {{ this.listsContent.title }}
       </div>
-
       <div class="c-title">
         欢迎语
       </div>
@@ -22,10 +21,10 @@
           class="c-huanl c-ll"
           v-for="(item1, index1) in question"
           :key="index1"
-          @click="toCreateModule(index1)"
+          v-show="edit"
         >
           <div class="d-right">
-            <i class="iconfont" @click="show(index1)">&#xe61c;</i>
+            <i class="iconfont" @click="showl(index1)">&#xe61c;</i>
             <div class="xuan" v-show="showXuan == index1 && showXuan1">
               <div class="xuanl" @click="top(index1)">
                 <i class="iconfont">&#xe692;</i> 上移
@@ -33,7 +32,7 @@
               <div class="xuanl" @click="under(index1)">
                 <i class="iconfont">&#xe619;</i> 下移
               </div>
-              <div class="xuanl" @click="remove(index1)">
+              <div class="xuanl" @click="top(index1)">
                 <i class="iconfont">&#xe631;</i> 新增
               </div>
               <div class="xuanl" @click="remove(index1)">
@@ -41,7 +40,7 @@
               </div>
             </div>
           </div>
-          <div v-if="item1.status == 0">
+          <div v-if="item1.status == 0" @click="editl(index1)">
             <div class="c-questionl">
               {{ item1.question }}
             </div>
@@ -54,7 +53,7 @@
               {{ item2.content }}
             </div>
           </div>
-          <div v-if="item1.status == 1">
+          <div v-if="item1.status == 1" @click="editl(index1)">
             <div class="c-questionl">
               {{ item1.question }}
             </div>
@@ -67,7 +66,7 @@
               {{ item2.content }}
             </div>
           </div>
-          <div v-if="item1.status == 2">
+          <div v-if="item1.status == 2" @click="editl(index1)">
             <div class="c-questionl">
               {{ item1.question }}
             </div>
@@ -81,13 +80,35 @@
             </div>
           </div>
         </div>
-        <div class="fixed">
-          <div class="fix">
-            <van-button class="height-btnl" @click="toSuccessTip" type="info"
-              >发布</van-button
-            >
-            <van-button class="height-btn" plain type="info">更多</van-button>
+
+        <div class="edit mar" v-show="!edit">
+          <div class="edit-xuan">
+            <div><i class="iconfont">&#xe632;</i> 保存</div>
+            <div><i class="iconfont">&#xe606;</i> 取消</div>
           </div>
+          <div class="edit-question">
+            {{ this.tem.question }}
+          </div>
+          <div
+            class="edit-answer"
+            v-for="(item, index) in this.tem.list"
+            :key="index"
+          >
+            {{ item.content }}
+          </div>
+        </div>
+        <div class="edit-xuan">
+          <div><i class="iconfont">&#xe657;</i> 选项</div>
+          <div><i class="iconfont">&#xe661;</i> 批量增加</div>
+        </div>
+      </div>
+
+      <div class="fixed">
+        <div class="fix">
+          <van-button class="height-btnl" @click="toSuccessTip" type="info"
+            >发布</van-button
+          >
+          <van-button class="height-btn" plain type="info">更多</van-button>
         </div>
       </div>
     </div>
@@ -102,7 +123,10 @@ export default {
       id: this.$route.query.id,
       question: [],
       showXuan: "",
-      showXuan1: false
+      showXuan1: false,
+      show: false,
+      edit: true,
+      tem: []
     };
   },
 
@@ -117,6 +141,25 @@ export default {
   },
 
   methods: {
+    editl(index) {
+      if (this.edit) {
+        this.edit = false;
+      } else {
+        this.edit = true;
+      }
+      this.tem = this.question[index];
+    },
+    onClickShow() {
+      console.log("开启");
+      this.show = true;
+    },
+
+    onClickHide() {
+      this.show = false;
+      console.log("关闭");
+    },
+
+    noop() {},
     // 成功提示
     toSuccessTip() {
       this.$toast.success({
@@ -141,7 +184,7 @@ export default {
         console.log(this.listsContent);
       });
     },
-    show(index) {
+    showl(index) {
       this.showXuan = index;
       if (this.showXuan1) {
         this.showXuan1 = false;
@@ -181,6 +224,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  width: 100%;
+  height: 200px;
+  background-color: #fff;
+}
 .top {
   margin-bottom: 100px;
 }
