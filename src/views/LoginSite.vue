@@ -1,9 +1,6 @@
 <!--  -->
 <template>
-  <div class="login">
-    <div class="back blue-color">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
+  <div class="login mar">
     <div class="title">登录“测评”</div>
     <van-field v-model="tel" type="tel" label="手机号" />
     <van-field
@@ -102,11 +99,12 @@ export default {
 }
 .login {
   margin-top: 20%;
+  width: 95%;
 }
 .login-btn {
   margin-top: 10%;
-  width: 50%;
-  height: 30px;
+  width: 60%;
+  height: 40px;
 }
 .login-l {
   display: flex;

@@ -1,9 +1,6 @@
 <!--  -->
 <template
   ><div>
-    <div class="back blue-color">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
     <span id="app">
       <!-- <span>Prize number: {{ prizeNumber }}</span> -->
       <!-- <button

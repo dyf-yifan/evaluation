@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <div class="back blue-color">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
     <div class="search-top">
       <img class="search-img" :src="require('../assets/sousuo.png')" alt="" />
       <input
@@ -85,6 +82,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.sea {
+  display: flex;
+}
 .container {
   width: 100%;
   height: auto;
@@ -93,20 +93,20 @@ export default {
   color: rgb(155, 163, 170);
 }
 .search {
-  font-size: 10px;
+  font-size: 14px;
   outline: none;
-  width: 73%;
-  height: 30px;
+  width: 75%;
+  height: 35px;
   display: flex;
   justify-content: center;
   border-radius: 20px;
-  border: 1px solid rgb(236, 236, 236);
+  border: 1px solid rgb(211, 204, 204);
   padding-left: 5%;
-  color: rgb(155, 163, 170);
+  color: rgb(131, 137, 141);
 }
 .search-top {
   display: flex;
-  margin-top: 20px;
+  margin-top: 5%;
   width: 100%;
 }
 .search-img {
@@ -114,7 +114,7 @@ export default {
 }
 .search-content {
   width: 90%;
-  padding-top: 15px;
+  padding-top: 3%;
   padding-bottom: 5px;
   padding-left: 1%;
   border-bottom: 1px solid rgb(236, 232, 232);
@@ -123,16 +123,16 @@ export default {
   margin-top: 20px;
   width: 90%;
   height: 23px;
-  font-size: 13px;
+  font-size: 14px;
   color: rgb(184, 188, 190);
   border-bottom: 1px solid rgb(235, 232, 232);
 }
 .search-title {
-  font-size: 14px;
+  font-size: 15px;
   color: rgb(110, 101, 101);
 }
 .search-part {
-  font-size: 11px;
+  font-size: 12px;
   color: rgb(184, 188, 190);
 }
 </style>

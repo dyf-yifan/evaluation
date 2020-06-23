@@ -111,17 +111,16 @@ export default {
 .my-swipe .van-swipe-item {
   color: #fff;
   font-size: 20px;
-  height: 140px;
+  height: 180px;
   text-align: center;
   background-color: #39a9ed;
 }
 .swipe-img {
   width: 100%;
-  height: 140px;
+  height: 180px;
 }
 .content {
-  width: 100%;
-  border-radius: 5%;
+  width: 95%;
 }
 .all {
   width: 30%;
@@ -137,10 +136,11 @@ export default {
   border-radius: 20px;
 }
 .content-card {
-  height: 125px;
-  margin-top: 12px;
+  height: 126px;
+  margin-top: 3%;
+  margin-bottom: 3%;
   width: 90%;
-  border-radius: 2%;
+  border-radius: 1%;
   display: flex;
   align-items: flex-end;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -154,11 +154,11 @@ export default {
 .part {
   width: 100%;
   height: 30%;
-  font-size: 10px;
+  font-size: 12px;
 }
 .title {
   width: 100%;
   height: 70%;
-  font-size: 15px;
+  font-size: 17px;
 }
 </style>

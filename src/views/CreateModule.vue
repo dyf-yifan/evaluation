@@ -1,8 +1,5 @@
 <template>
   <div class="conteiner">
-    <div class="back blue-color">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
     <div class="c-container mar">
       <div class="c-title">项目标题</div>
       <div class="c-huanl c-l">
@@ -26,7 +23,7 @@
           v-show="edit"
         >
           <div class="d-right">
-            <i class="iconfont" @click="showl(index1)">&#xe61c;</i>
+            <i class="iconfont ax" @click="showl(index1)">&#xe61c;</i>
             <div class="xuan" v-show="showXuan == index1 && showXuan1">
               <div class="xuanl" @click="top(index1)">
                 <i class="iconfont">&#xe692;</i> 上移
@@ -104,14 +101,15 @@
           </div>
         </div>
       </div>
-
-      <div class="fixed">
-        <div class="fix">
-          <van-button class="height-btnl" @click="toSuccessTip" type="info"
-            >发布</van-button
-          >
-          <van-button class="height-btn" plain type="info">更多</van-button>
-        </div>
+    </div>
+    <div class="fixed">
+      <div class="fix">
+        <van-button class="height-btnl" @click="toSuccessTip" type="info"
+          >发布</van-button
+        >
+        <van-button class="height-btn" plain type="info" to="/my-project"
+          >更多</van-button
+        >
       </div>
     </div>
   </div>
@@ -265,6 +263,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.ax {
+  margin-top: 1%;
+}
 .wrapper {
   display: flex;
   align-items: center;
@@ -309,6 +310,9 @@ export default {
   border-bottom: 1px solid #e8e8e8;
   color: #363636;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .conteiner {
   width: 100%;
@@ -322,7 +326,7 @@ export default {
   margin-top: 5%;
   width: 100%;
   height: 30px;
-  font-size: 14px;
+  font-size: 15px;
   color: dimgrey;
 }
 .c-titlel {
@@ -334,10 +338,13 @@ export default {
 }
 .c-hu {
   font-size: 13.5px;
-  margin-top: 5px;
+  margin-top: 5%;
 }
 .d-right {
   display: flex;
   justify-content: flex-end;
+}
+.c-questionl {
+  font-size: 16px;
 }
 </style>

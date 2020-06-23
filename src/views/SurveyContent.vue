@@ -1,9 +1,6 @@
 <template>
   <div>
     <div class="s-container mar">
-      <div class="back blue-color">
-        <i class="iconfont" @click="goBack()">&#xe609;</i>
-      </div>
       <div>
         <div v-for="(type, index1) in questions" :key="index1">
           <div class="s-card" v-if="type.status == 0">
@@ -114,7 +111,9 @@
         <van-button class="height-btnl" type="info" @click="toCreateModule(id)"
           >使用此模板创建</van-button
         >
-        <van-button class="height-btn" plain type="info">查看更多</van-button>
+        <van-button class="height-btn" plain type="info" to="/my-project"
+          >查看更多</van-button
+        >
       </div>
     </div>
   </div>
@@ -195,7 +194,7 @@ export default {
 .s-container {
   width: 93%;
   height: 100%;
-  margin-top: 5%;
+  margin-top: 6%;
 }
 .s-question {
   font-size: 14px;
@@ -208,7 +207,7 @@ export default {
 }
 .s-card {
   border: 1px solid rgb(236, 229, 229);
-  margin-top: 2%;
+  margin-top: 3%;
   padding-top: 1%;
   padding-left: 2%;
 }

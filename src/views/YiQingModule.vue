@@ -1,9 +1,6 @@
 <!-- 疫情防控专题模板 -->
 <template>
-  <div class="container" id="capture">
-    <div class="back">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
+  <div class="containerl" id="capture">
     <img
       class="module-img"
       :src="require('../assets/banner_plague.png')"
@@ -254,7 +251,7 @@ export default {
 .er-img {
   width: 20%;
   height: 50px;
-  margin-top: 15%;
+  margin-top: 21%;
 }
 .close-img {
   display: flex;
@@ -281,10 +278,10 @@ export default {
   display: none;
   position: absolute;
   width: 75%;
-  height: 350px;
-  left: 50%;
-  right: 50%;
-  top: 25%;
+  height: 400px;
+  left: 42%;
+  right: 25%;
+  top: 20%;
   margin-left: -120px;
   border: 1px solid rgb(218, 213, 213);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -295,18 +292,19 @@ export default {
 .fenxiang-img {
   display: flex;
   justify-content: flex-end;
-  margin-top: -118px;
+  margin-top: -140px;
+  margin-right: 2%;
 }
 .fenxiang {
   width: 23px;
-  height: 23px;
+  height: 24px;
 }
 .content-top {
-  margin-top: 95px;
+  margin-top: 110px;
 }
 .module-img {
   width: 100%;
-  height: 120px;
+  height: 145px;
 }
 .a-style {
   color: #828282;
@@ -324,11 +322,11 @@ export default {
   height: auto;
 }
 .module-card {
-  margin-top: 9px;
-  width: 47%;
-  height: 160px;
+  margin-top: 4%;
+  width: 45%;
+  height: 165px;
   border-radius: 1%;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(37, 37, 37, 0.1);
 }
 .module-bc {
   width: 100%;
@@ -338,7 +336,7 @@ export default {
   width: 53%;
   height: 35%;
   position: absolute;
-  clip: rect(0px 150px 85px 0px);
+  clip: rect(0px 180px 95px 0px);
 }
 .module-content {
   padding-left: 1%;
@@ -348,31 +346,33 @@ export default {
 .module-title {
   width: 95%;
   height: 50%;
-  font-size: 13px;
+  font-size: 15px;
 }
 .module-bot {
   width: 100%;
-  height: 40%;
+  height: 35%;
   display: flex;
   align-items: center;
   padding-top: 2%;
-  padding-bottom: 2%;
+  padding-bottom: 5%;
 }
 .module-part {
   height: 100%;
-  font-size: 10px;
+  width: 59%;
+  font-size: 13px;
   color: rgb(184, 188, 190);
+  padding-left: 2%;
 }
 .module-btn {
-  height: 80%;
-  font-size: 1px;
+  // height: 80%;
+  font-size: 12px;
   background-color: #fff;
-  border: 1px solid rgb(140, 196, 253);
-  color: rgb(140, 196, 253);
+  border: 1px solid rgb(108, 169, 230);
+  color: rgb(108, 169, 230);
   border-radius: 3%;
 }
-.container {
-  width: 320px;
+.containerl {
+  width: 100%;
   height: 568px;
 }
 </style>

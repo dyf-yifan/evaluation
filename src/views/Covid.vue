@@ -1,9 +1,6 @@
 <!-- 新型冠状病毒防治统一考试 -->
 <template>
   <div>
-    <div class="back">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
-    </div>
     <img :src="require('../assets/test.png')" class="test-img" />
     <div class="task-home mar">
       <div class="task">
@@ -27,8 +24,7 @@
           </div>
 
           <div v-if="type.status == 2" v-show="index1 == index">
-            {{ type.question }}
-
+            <div class="task-question">{{ type.question }}</div>
             <div
               class="task-answer"
               v-for="(choice, index2) in type.choiceList"
@@ -125,6 +121,10 @@ export default {
           this.front = true;
         } else {
           //弹框
+          this.$toast({
+            message: "选中答案才可以下一题",
+            position: "middle"
+          });
         }
       } else {
         if (this.codeId[this.index] != null) {
@@ -136,6 +136,10 @@ export default {
           this.front = true;
         } else {
           //弹框
+          this.$toast({
+            message: "选中答案才可以下一题",
+            position: "middle"
+          });
         }
       }
     },
