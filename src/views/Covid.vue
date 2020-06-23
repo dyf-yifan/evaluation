@@ -26,8 +26,13 @@
           <div v-if="type.status == 2" v-show="index1 == index">
             {{ type.question }}
 
-            <div v-for="(choice, index2) in type.choiceList" :key="index2">
+            <div
+              class="task-answer"
+              v-for="(choice, index2) in type.choiceList"
+              :key="index2"
+            >
               <input
+                class="inputl"
                 type="checkBox"
                 :name="type.homeTypeId"
                 :value="choice.homeChoiceId"
@@ -37,13 +42,27 @@
           </div>
         </div>
       </div>
-      <van-button type="info" @click="top()" v-show="front">上一页</van-button>
-      <van-button type="info" @click="nest()" v-show="behind"
-        >下一页</van-button
-      >
-      <van-button type="info" @click="getResult()" v-show="code"
-        >提交</van-button
-      >
+      <div class="df-centerlll">
+        <van-button
+          type="info"
+          plain
+          class="c-btn"
+          @click="top()"
+          v-show="front"
+          >上一页</van-button
+        >
+        <van-button type="info" class="c-btn" @click="nest()" v-show="behind"
+          >下一页</van-button
+        >
+        <van-button
+          color="linear-gradient(to right, #4bb0ff, #6149f6)"
+          type="info"
+          class="c-btn"
+          @click="getResult()"
+          v-show="code"
+          >提交</van-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -60,7 +79,8 @@ export default {
       index: 0,
       front: false,
       behind: true,
-      code: false
+      code: false,
+      score: ""
     };
   },
 
@@ -155,7 +175,13 @@ export default {
       this.axios
         .post("http://120.26.70.42:8080/api/homeChoice/result", tem)
         .then(res => {
-          alert(res.data.data);
+          // alert(res.data.data);
+          this.score = res.data.data;
+          console.log(this.score);
+          this.$router.push({
+            path: "/type-content/commit",
+            query: { score: this.score }
+          });
         });
     }
   }
@@ -187,9 +213,6 @@ export default {
   border-radius: 1%;
   padding-left: 3%;
 }
-// input {
-//   display: none;
-// }
 .inputl {
   width: 20px;
   height: 15px;
@@ -203,5 +226,11 @@ export default {
   position: absolute;
   border-radius: 50%;
   transition: 0.3s ease;
+}
+.c-btn {
+  margin-top: 8%;
+  height: 32px;
+  width: 30%;
+  border-radius: 2px;
 }
 </style>

@@ -19,7 +19,7 @@
     <div class="content">
       <div class="content-top mar df-center">
         <div class="all df-centerl">- 全部 -</div>
-        <router-link to="/search" class="a-style df-centerl">
+        <router-link to="/search" class="a-style af">
           <i class="iconfont">&#xe617;</i>
           <span class="search-left">搜索</span>
         </router-link>
@@ -33,7 +33,7 @@
       v-bind:style="{
         backgroundImage: 'url(' + item.img + ')',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%'
+        backgroundSize: '100%',
       }"
     >
       <div class="img-z white-color">
@@ -50,7 +50,7 @@ export default {
     return {
       currentPage: 1,
       lists: [],
-      listId: null
+      listId: null,
     };
   },
   components: {},
@@ -70,7 +70,7 @@ export default {
     toListContent(listId) {
       this.$router.push({
         path: "/type-content",
-        query: { id: listId }
+        query: { id: listId },
       });
     },
     getLists() {
@@ -78,16 +78,16 @@ export default {
         method: "POST",
         url: "http://120.26.70.42:8080/api/list/home",
         headers: {
-          "Content-Type": "Access-Control-Allow-Origin"
+          "Content-Type": "Access-Control-Allow-Origin",
         },
-        params: {}
-      }).then(res => {
+        params: {},
+      }).then((res) => {
         this.lists = res.data.data;
         this.listId = this.lists.list_id;
         console.log(this.lists);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -108,6 +108,9 @@ export default {
   border: 1px solid #e8e8e8;
   font-size: 14px;
   border-radius: 20px;
+}
+.af {
+  margin-left: 10%;
 }
 .my-swipe .van-swipe-item {
   color: #fff;

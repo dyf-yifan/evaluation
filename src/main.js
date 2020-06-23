@@ -22,9 +22,11 @@ import {
   Toast,
   Search,
   Overlay,
-  Field
+  Field,
+  Dialog
 } from "vant";
 
+Vue.use(Dialog);
 Vue.use(Field);
 Vue.use(Overlay);
 Vue.use(Search);
