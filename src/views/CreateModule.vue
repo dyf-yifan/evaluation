@@ -83,22 +83,29 @@
 
         <div class="edit mar" v-show="!edit">
           <div class="edit-xuan">
-            <div><i class="iconfont">&#xe632;</i> 保存</div>
-            <div><i class="iconfont">&#xe606;</i> 取消</div>
+            <div @click="save()"><i class="iconfont">&#xe632;</i> 保存</div>
+            <div @click="cancel()"><i class="iconfont">&#xe606;</i> 取消</div>
           </div>
           <div class="edit-question">
             {{ this.tem.question }}
           </div>
-          <div
+          <!-- <div
             class="edit-answer"
             v-for="(item, index) in this.tem.list"
             :key="index"
           >
-            {{ item.content }}
-          </div>
+            <input v-model="tem.list[index].content" type="text" />
+          </div> -->
+
+          <van-cell-group v-for="(item, index) in this.tem.list" :key="index">
+            <van-field
+              v-model="tem.list[index].content"
+              placeholder="请输入问题选项"
+            />
+          </van-cell-group>
         </div>
         <div class="edit-xuan">
-          <div><i class="iconfont">&#xe657;</i> 选项</div>
+          <div><i class="iconfont" @click="add()">&#xe657;</i> 选项</div>
           <div><i class="iconfont">&#xe661;</i> 批量增加</div>
         </div>
       </div>
@@ -116,6 +123,7 @@
 </template>
 
 <script>
+import { Dialog } from "vant";
 export default {
   data() {
     return {
@@ -126,7 +134,11 @@ export default {
       showXuan1: false,
       show: false,
       edit: true,
-      tem: []
+      tem: [],
+      choiceTem: {
+        content: "请选择"
+      },
+      temIndex: ""
     };
   },
 
@@ -148,6 +160,7 @@ export default {
         this.edit = true;
       }
       this.tem = this.question[index];
+      this.temIndex = index;
     },
     onClickShow() {
       console.log("开启");
@@ -219,6 +232,25 @@ export default {
     remove(index) {
       this.question.splice(index, 1);
       this.showXuan1 = false;
+    },
+    add() {
+      let tem = { content: "" };
+      this.tem.list.push(tem);
+    },
+    save() {
+      Dialog.confirm({
+        message: "确定保存吗？"
+      }).then(() => {
+        this.question[this.temIndex] = this.tem;
+        this.edit = !this.edit;
+      });
+    },
+    cancel() {
+      Dialog.confirm({
+        message: "确定取消吗？"
+      }).then(() => {
+        this.edit = !this.edit;
+      });
     }
   }
 };

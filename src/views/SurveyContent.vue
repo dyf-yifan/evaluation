@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="container mar">
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
       <div class="task-home">
         <div
           class="task mar-top"
@@ -10,7 +9,7 @@
         >
           <div class="task-if" v-if="type.status == 0">
             <div class="task-question">{{ type.question }}</div>
-            <div
+            <!-- <div
               class="task-content"
               v-for="(choice, index2) in type.list"
               :key="index2"
@@ -21,43 +20,101 @@
                 :value="choice.homeChoiceId"
                 disabled="disabled"
               />{{ choice.content }}
-            </div>
+            </div> -->
+            <van-swipe-cell
+              :before-close="beforeClose"
+              v-for="(choice, index2) in type.list"
+              :key="index2"
+            >
+              <van-cell
+                :border="false"
+                :value="choice.content"
+                @click="
+                  function tests() {
+                    this.start = index1;
+                    this.end = index2;
+                  }
+                "
+                :id="index2"
+              />
+              <template #right>
+                <van-button square type="danger" text="删除" />
+              </template>
+            </van-swipe-cell>
           </div>
 
           <div class="task-if" v-if="type.status == 1">
             <div class="task-question">{{ type.question }}</div>
 
-            <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
-                type="radio"
-                :name="type.one_id"
-                :value="choice.homeChoiceId"
-                disabled="disabled"
-              />{{ choice.content }}
-            </div>
+            <van-swipe-cell
+              :before-close="beforeClose"
+              v-for="(choice, index2) in type.list"
+              :key="index2"
+            >
+              <van-cell
+                :border="false"
+                :value="choice.content"
+                @click="
+                  function tests() {
+                    start = index1;
+                    end = index2;
+                  }
+                "
+                :id="index2"
+              />
+              <template #right>
+                <van-button square type="danger" text="删除" />
+              </template>
+            </van-swipe-cell>
           </div>
 
           <div class="task-if" v-if="type.status == 2">
             <div class="task-question">{{ type.question }}</div>
 
-            <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
-                type="checkBox"
-                :value="choice.homeChoiceId"
-                disabled="disabled"
-              />{{ choice.content }}
-            </div>
+            <van-swipe-cell
+              :before-close="beforeClose"
+              v-for="(choice, index2) in type.list"
+              :key="index2"
+            >
+              <van-cell
+                :border="false"
+                :value="choice.content"
+                @click="
+                  function tests() {
+                    start = index1;
+                    end = index2;
+                  }
+                "
+                :id="index2"
+              />
+              <template #right>
+                <van-button square type="danger" text="删除" />
+              </template>
+            </van-swipe-cell>
           </div>
           <div class="task-if" v-if="type.status == 3">
             <div class="task-question">{{ type.question }}</div>
-            <div v-for="(choice, index2) in type.list" :key="index2">
-              <input
-                type="radio"
-                :name="type.one_id"
-                :value="choice.homeChoiceId"
-                disabled="disabled"
-              />{{ choice.content }}
-            </div>
+            <van-swipe-cell
+              :before-close="beforeClose"
+              v-for="(choice, index2) in type.list"
+              :key="index2"
+            >
+              <van-cell
+                :border="false"
+                :value="choice.content"
+                @click="
+                  function tests() {
+                    start = index1;
+                    end = index2;
+                  }
+                "
+                :id="index2"
+                :name="index1"
+              />
+              <template #right>
+                <van-button square type="danger" text="删除" />
+              </template>
+            </van-swipe-cell>
           </div>
         </div>
       </div>
@@ -74,6 +131,7 @@
 </template>
 
 <script>
+import { Dialog } from "vant";
 export default {
   data() {
     return {
@@ -85,7 +143,9 @@ export default {
       front: false,
       behind: true,
       code: false,
-      codeId: []
+      codeId: [],
+      start: 0,
+      end: 0
     };
   },
   components: {},
@@ -95,9 +155,6 @@ export default {
   },
   mounted() {},
   methods: {
-    goBack() {
-      window.history.go(-1);
-    },
     toCreateModule(id) {
       this.$router.push({
         path: "/yiqing-module/survey-content/create-module",
@@ -124,16 +181,34 @@ export default {
           this.question[i].question = result;
         }
         this.questions = this.question;
-        console.log(this.questions);
       });
+    },
+    beforeClose({ position, instance }) {
+      switch (position) {
+        case "right":
+          Dialog.confirm({
+            message: "确定删除吗？"
+          }).then(() => {
+            this.questions[this.start].list.splice(this.end - 1, 1);
+            instance.close();
+          });
+          break;
+      }
     }
-    // set() {
-    //   alert(this.$route.params.id);
-    // }
   }
 };
 </script>
 <style lang="scss" scoped>
+.height-btnl {
+  height: 36px;
+  width: 55%;
+  border-radius: 5%;
+  font-size: 13px;
+}
+.height-btn {
+  height: 34px;
+  border-radius: 5%;
+}
 .container {
   width: 85%;
 }
@@ -158,5 +233,19 @@ input {
   width: 100%;
   height: auto;
   font-size: 15px;
+}
+.fix {
+  border-top: 2px solid rgb(243, 241, 241);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+}
+.fixed {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  top: 510px;
 }
 </style>
