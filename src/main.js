@@ -19,9 +19,13 @@ import {
   Image as VanImage,
   RadioGroup,
   Radio,
-  Toast
+  Toast,
+  Search,
+  Overlay
 } from "vant";
 
+Vue.use(Overlay);
+Vue.use(Search);
 Vue.use(Toast);
 Vue.use(Skeleton);
 Vue.use(Tab);

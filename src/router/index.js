@@ -44,6 +44,11 @@ const routes = [
     component: () => import("../views/CreateModule.vue")
   },
   {
+    path: "/yiqing-module/survey-content/create-module/edit",
+    name: "Edit",
+    component: () => import("../views/Edit.vue")
+  },
+  {
     path: "/type-content",
     name: "TypeContent",
     component: () => import("../views/TypeContent.vue")
@@ -57,6 +62,11 @@ const routes = [
     path: "/type-content/answer",
     name: "Answer",
     component: () => import("../views/Answer.vue")
+  },
+  {
+    path: "/my-project",
+    name: "MyProject",
+    component: () => import("../views/MyProject.vue")
   },
   {
     path: "/search",

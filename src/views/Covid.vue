@@ -2,17 +2,11 @@
 <template>
   <div>
     <div>
-      <!-- <div>
-        <img
-          src="https://cdn1.wenjuan.com/5e342724a320fc092a7707e9_lib_thumbnail_1580486452.png"
-          class="swipe-imgl"
-        />
-      </div> -->
-      <i class="iconfont" @click="goBack()">&#xe609;</i>
       <div>
         <div v-for="(type, index1) in typeList" :key="index1">
           <div v-if="type.status == 1" v-show="index1 == index">
             {{ type.question }}
+
             <div v-for="(choice, index2) in type.choiceList" :key="index2">
               <input
                 type="radio"
@@ -31,6 +25,7 @@
                 type="checkBox"
                 :name="type.homeTypeId"
                 :value="choice.homeChoiceId"
+                @click="getCode1(index1, choice.homeChoiceId)"
               />{{ choice.content }}
             </div>
           </div>
@@ -39,7 +34,7 @@
     </div>
     <button @click="top()" v-show="front">上一页</button>
     <button @click="nest()" v-show="behind">下一页</button>
-    <button @click="getCode()" v-show="code">提交</button>
+    <button @click="getResult()" v-show="code">提交</button>
   </div>
 </template>
 
@@ -51,7 +46,7 @@ export default {
       typeList: [],
       choiceList: [],
       radio: "1",
-      codeId: [],
+      codeId: [[]],
       index: 0,
       front: false,
       behind: true,
@@ -70,9 +65,6 @@ export default {
   },
 
   methods: {
-    goBack() {
-      window.history.go(-1);
-    },
     getCovid() {
       this.axios({
         method: "POST",
@@ -87,17 +79,28 @@ export default {
       });
     },
     nest() {
-      this.$toast({
-        message: "请选择一个选项",
-        position: "top"
-      });
-      if (this.codeId[this.index] != null) {
-        if (this.index == this.typeList.length - 1) {
-          this.behind = false;
-          this.code = true;
+      if (Array.isArray(this.codeId[this.index])) {
+        if (this.codeId[this.index].length != 0) {
+          if (this.index == this.typeList.length - 2) {
+            this.behind = false;
+            this.code = true;
+          }
+          this.index++;
+          this.front = true;
+        } else {
+          //弹框
         }
-        this.index++;
-        this.front = true;
+      } else {
+        if (this.codeId[this.index] != null) {
+          if (this.index == this.typeList.length - 1) {
+            this.behind = false;
+            this.code = true;
+          }
+          this.index++;
+          this.front = true;
+        } else {
+          //弹框
+        }
       }
     },
     top() {
@@ -110,19 +113,37 @@ export default {
     },
     getCode(index, value) {
       this.codeId[index] = value;
-      // var oTxt = document.getElementsByTagName("input");
-      // var tem = 0;
-      // for (var i = 0; i < oTxt.length; i++) {
-      //   if (oTxt[i].checked) {
-      //     this.codeId[tem] = oTxt[i].value;
-      //     tem++;
-      //   }
-      // }
-      this.getResult();
+    },
+    getCode1(index, value) {
+      if (Array.isArray(this.codeId[index])) {
+        let arr = [];
+        arr = this.codeId[index];
+        if (arr.length > 0) {
+          if (arr.indexOf(value) == -1) {
+            arr.push(value);
+            this.codeId[index] = arr;
+          }
+        }
+      } else {
+        let arr1 = [];
+        arr1.push(value);
+        this.codeId[index] = arr1;
+      }
     },
     getResult() {
+      let tem = [];
+      for (let i = 0; i < this.codeId.length; i++) {
+        let arr = this.codeId[i];
+        if (Array.isArray(arr)) {
+          for (let j = 0; i < arr.length; i++) {
+            tem.push(arr[j]);
+          }
+        } else {
+          tem.push(arr);
+        }
+      }
       this.axios
-        .post("http://120.26.70.42:8080/api/homeChoice/result", this.codeId)
+        .post("http://120.26.70.42:8080/api/homeChoice/result", tem)
         .then(res => {
           alert(res.data.data);
         });

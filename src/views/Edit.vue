@@ -2,91 +2,20 @@
   <div class="conteiner">
     <i class="iconfont" @click="goBack()">&#xe609;</i>
     <div class="c-container mar">
-      <div class="c-title">项目标题</div>
-      <div class="c-huanl c-l">
-        {{ this.listsContent.title }}
-      </div>
-
-      <div class="c-title">
-        欢迎语
-      </div>
-      <div class="c-huanl c-l">
-        <div class="c-huanll">
-          亲爱的同学们，在延迟开学期间，请您花一点时间，填答以下有关网络课程的调查问卷。问卷采取匿名方式，请认真作答。“固居于室，得以静心，专注于学，突破提升”。希望你秉持学校和老师的教诲，在家长的悉心关怀下，合理规划居家学习与生活，讲安全、讲卫生、少出门、不聚集，科学防控病毒，静候春暖花开。
-        </div>
-      </div>
-
       <div class="c-title">题目</div>
       <div class="top">
-        <div
-          class="c-huanl c-ll"
-          v-for="(item1, index1) in question"
-          :key="index1"
-          @click="toCreateModule(index1)"
-        >
-          <div class="d-right">
-            <i class="iconfont" @click="show(index1)">&#xe61c;</i>
-            <div class="xuan" v-show="showXuan == index1 && showXuan1">
-              <div class="xuanl" @click="top(index1)">
-                <i class="iconfont">&#xe692;</i> 上移
-              </div>
-              <div class="xuanl" @click="under(index1)">
-                <i class="iconfont">&#xe619;</i> 下移
-              </div>
-              <div class="xuanl" @click="remove(index1)">
-                <i class="iconfont">&#xe631;</i> 新增
-              </div>
-              <div class="xuanl" @click="remove(index1)">
-                <i class="iconfont">&#xe603;</i> 删除
-              </div>
-            </div>
-          </div>
-          <div v-if="item1.status == 0">
+        <div class="c-huanl c-ll">
+          <div>
             <div class="c-questionl">
-              {{ item1.question }}
+              {{ this.question[0].question }}
             </div>
             <div
-              class="c-hu"
-              v-for="(item2, index2) in item1.list"
-              :key="index2"
+              class="c-hul"
+              v-for="(item, index) in this.question[this.id].list"
+              :key="index"
             >
-              <i class="iconfont">&#xe67f;</i>
-              {{ item2.content }}
+              {{ item.content }}
             </div>
-          </div>
-          <div v-if="item1.status == 1">
-            <div class="c-questionl">
-              {{ item1.question }}
-            </div>
-            <div
-              class="c-hu"
-              v-for="(item2, index2) in item1.list"
-              :key="index2"
-            >
-              <i class="iconfont">&#xe67f;</i>
-              {{ item2.content }}
-            </div>
-          </div>
-          <div v-if="item1.status == 2">
-            <div class="c-questionl">
-              {{ item1.question }}
-            </div>
-            <div
-              class="c-hu"
-              v-for="(item2, index2) in item1.list"
-              :key="index2"
-            >
-              <i class="iconfont">&#xe994;</i>
-              {{ item2.content }}
-            </div>
-          </div>
-        </div>
-        <div class="fixed">
-          <div class="fix">
-            <van-button class="height-btnl" @click="toSuccessTip" type="info"
-              >发布</van-button
-            >
-            <van-button class="height-btn" plain type="info">更多</van-button>
           </div>
         </div>
       </div>
@@ -120,7 +49,7 @@ export default {
     // 成功提示
     toSuccessTip() {
       this.$toast.success({
-        message: "发布成功"
+        message: "发布成功",
       });
     },
 
@@ -134,8 +63,8 @@ export default {
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
-        params: {}
-      }).then(res => {
+        params: {},
+      }).then((res) => {
         this.listsContent = res.data.data;
         this.question = this.listsContent.oneList;
         console.log(this.listsContent);
@@ -176,8 +105,8 @@ export default {
     remove(index) {
       this.question.splice(index, 1);
       this.showXuan1 = false;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -243,5 +172,10 @@ export default {
 .d-right {
   display: flex;
   justify-content: flex-end;
+}
+.c-hul {
+  font-size: 13.5px;
+  margin-top: 5px;
+  border-bottom: 1px solid rgb(212, 210, 210);
 }
 </style>
