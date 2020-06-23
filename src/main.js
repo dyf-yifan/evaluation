@@ -23,9 +23,11 @@ import {
   Search,
   Overlay,
   Field,
-  Dialog
+  Dialog,
+  SwipeCell
 } from "vant";
 
+Vue.use(SwipeCell);
 Vue.use(Dialog);
 Vue.use(Field);
 Vue.use(Overlay);

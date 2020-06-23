@@ -1,6 +1,9 @@
 <!--  -->
 <template>
-  <div class="m-container">
+  <div class="m-container blue-color">
+    <div class="back">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <div class="m-card padding-card mar">
       <div class="m-title d-one">网课问卷调查-学生版</div>
       <div class="m-middle df-center">
@@ -42,7 +45,11 @@ export default {
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    goBack() {
+      window.history.go(-1);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

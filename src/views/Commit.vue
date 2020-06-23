@@ -1,6 +1,9 @@
 <!--  -->
 <template
   ><div>
+    <div class="back blue-color">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <span id="app">
       <!-- <span>Prize number: {{ prizeNumber }}</span> -->
       <!-- <button
@@ -109,6 +112,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     onClickRotate() {
       if (this.rolling) {
         return;

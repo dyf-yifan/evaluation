@@ -1,6 +1,8 @@
 <template>
   <div class="container mar">
-    <i class="iconfont" @click="goBack()">&#xe609;</i>
+    <div class="back blue-color">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <div>
       <div
         class="task-home mar"

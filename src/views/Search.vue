@@ -1,7 +1,9 @@
 <!--  -->
 <template>
   <div class="container">
-    <i class="iconfont" @click="goBack()">&#xe609;</i>
+    <div class="back blue-color sea">
+      <i class="iconfont" @click="goBack()">&#xe609;返回</i>
+    </div>
     <div class="search-top">
       <img class="search-img" :src="require('../assets/sousuo.png')" alt="" />
       <input
@@ -34,7 +36,7 @@ export default {
       keywords: "",
       searchList: [],
       searchListLenght: "",
-      searchListShow: false
+      searchListShow: false,
     };
   },
 
@@ -46,7 +48,7 @@ export default {
   watch: {
     keywords: function() {
       this.serach();
-    }
+    },
   },
   methods: {
     goBack() {
@@ -57,23 +59,26 @@ export default {
         method: "POST",
         url: "http://120.26.70.42:8080/api/list/home/keywords",
         headers: {
-          "Content-Type": "Access-Control-Allow-Origin"
+          "Content-Type": "Access-Control-Allow-Origin",
         },
         params: {
-          keywords: this.keywords
-        }
-      }).then(res => {
+          keywords: this.keywords,
+        },
+      }).then((res) => {
         this.searchList = res.data.data;
         this.searchListLenght = this.searchList.length;
         this.searchListShow = true;
         console.log(this.searchListLenght);
         console.log(this.searchList);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
+.sea {
+  display: flex;
+}
 .container {
   width: 100%;
   height: auto;
@@ -95,7 +100,7 @@ export default {
 }
 .search-top {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10%;
   width: 100%;
 }
 .search-img {

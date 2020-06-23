@@ -1,7 +1,9 @@
 <!-- 疫情防控专题模板 -->
 <template>
   <div class="container" id="capture">
-    <i class="iconfont" @click="goBack()">&#xe609;</i>
+    <div class="back">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <img
       class="module-img"
       :src="require('../assets/banner_plague.png')"
@@ -31,10 +33,14 @@
 
     <div class="content-top mar df-center">
       <div class="all df-centerl">- 全部 -</div>
-      <router-link to="/yiqing-module/module-search" class="a-style df-centerl">
-        <i class="iconfont">&#xe617;</i>
-        <span class="search-left">搜索</span>
-      </router-link>
+      <van-button
+        type="default"
+        @click="toModuleSearch()"
+        to="/module-search"
+        class="af"
+      >
+        <i class="iconfont">&#xe617;</i> 搜索
+      </van-button>
     </div>
     <div class="df">
       <div
@@ -94,6 +100,11 @@ export default {
   },
 
   methods: {
+    toModuleSearch() {
+      this.$router.push({
+        path: "/module-search"
+      });
+    },
     goBack() {
       window.history.go(-1);
     },
@@ -284,11 +295,11 @@ export default {
 .fenxiang-img {
   display: flex;
   justify-content: flex-end;
-  margin-top: -122px;
+  margin-top: -118px;
 }
 .fenxiang {
-  width: 25px;
-  height: 26px;
+  width: 23px;
+  height: 23px;
 }
 .content-top {
   margin-top: 95px;

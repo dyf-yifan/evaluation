@@ -1,5 +1,8 @@
 <template>
   <div class="conteiner">
+    <div class="back blue-color">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <i class="iconfont" @click="goBack()">&#xe609;</i>
     <div class="c-container mar">
       <div class="c-title">题目</div>
@@ -49,7 +52,7 @@ export default {
     // 成功提示
     toSuccessTip() {
       this.$toast.success({
-        message: "发布成功",
+        message: "发布成功"
       });
     },
 
@@ -63,8 +66,8 @@ export default {
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
-        params: {},
-      }).then((res) => {
+        params: {}
+      }).then(res => {
         this.listsContent = res.data.data;
         this.question = this.listsContent.oneList;
         console.log(this.listsContent);
@@ -105,8 +108,8 @@ export default {
     remove(index) {
       this.question.splice(index, 1);
       this.showXuan1 = false;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

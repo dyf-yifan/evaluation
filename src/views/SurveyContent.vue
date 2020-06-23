@@ -1,38 +1,26 @@
 <template>
   <div>
-    <div class="container mar">
-      <div class="task-home">
-        <div
-          class="task mar-top"
-          v-for="(type, index1) in questions"
-          :key="index1"
-        >
-          <div class="task-if" v-if="type.status == 0">
-            <div class="task-question">{{ type.question }}</div>
-            <!-- <div
-              class="task-content"
-              v-for="(choice, index2) in type.list"
-              :key="index2"
-            >
-              <input
-                type="radio"
-                :name="type.one_id"
-                :value="choice.homeChoiceId"
-                disabled="disabled"
-              />{{ choice.content }}
-            </div> -->
+    <div class="s-container mar">
+      <div class="back blue-color">
+        <i class="iconfont" @click="goBack()">&#xe609;</i>
+      </div>
+      <div>
+        <div v-for="(type, index1) in questions" :key="index1">
+          <div class="s-card" v-if="type.status == 0">
+            <div class="s-question">{{ type.question }}</div>
             <van-swipe-cell
               :before-close="beforeClose"
               v-for="(choice, index2) in type.list"
               :key="index2"
             >
               <van-cell
+                class="s-content"
                 :border="false"
                 :value="choice.content"
                 @click="
                   function tests() {
-                    this.start = index1;
-                    this.end = index2;
+                    start = index1;
+                    end = index2;
                   }
                 "
                 :id="index2"
@@ -43,10 +31,37 @@
             </van-swipe-cell>
           </div>
 
-          <div class="task-if" v-if="type.status == 1">
-            <div class="task-question">{{ type.question }}</div>
+          <div class="s-card" v-if="type.status == 1">
+            <div>{{ type.question }}</div>
 
             <van-swipe-cell
+              :before-close="beforeClose"
+              v-for="(choice, index2) in type.list"
+              :key="index2"
+            >
+              <van-cell
+                class="s-content"
+                :border="false"
+                :value="choice.content"
+                @click="
+                  function tests() {
+                    start = index1;
+                    end = index2;
+                  }
+                "
+                :id="index2"
+              />
+              <template #right>
+                <van-button square type="danger" text="删除" />
+              </template>
+            </van-swipe-cell>
+          </div>
+
+          <div class="s-card" v-if="type.status == 2">
+            <div>{{ type.question }}</div>
+
+            <van-swipe-cell
+              class="s-content"
               :before-close="beforeClose"
               v-for="(choice, index2) in type.list"
               :key="index2"
@@ -67,16 +82,15 @@
               </template>
             </van-swipe-cell>
           </div>
-
-          <div class="task-if" v-if="type.status == 2">
-            <div class="task-question">{{ type.question }}</div>
-
+          <div class="s-card" v-if="type.status == 3">
+            <div>{{ type.question }}</div>
             <van-swipe-cell
               :before-close="beforeClose"
               v-for="(choice, index2) in type.list"
               :key="index2"
             >
               <van-cell
+                class="s-content"
                 :border="false"
                 :value="choice.content"
                 @click="
@@ -86,30 +100,6 @@
                   }
                 "
                 :id="index2"
-              />
-              <template #right>
-                <van-button square type="danger" text="删除" />
-              </template>
-            </van-swipe-cell>
-          </div>
-          <div class="task-if" v-if="type.status == 3">
-            <div class="task-question">{{ type.question }}</div>
-            <van-swipe-cell
-              :before-close="beforeClose"
-              v-for="(choice, index2) in type.list"
-              :key="index2"
-            >
-              <van-cell
-                :border="false"
-                :value="choice.content"
-                @click="
-                  function tests() {
-                    start = index1;
-                    end = index2;
-                  }
-                "
-                :id="index2"
-                :name="index1"
               />
               <template #right>
                 <van-button square type="danger" text="删除" />
@@ -144,7 +134,7 @@ export default {
       behind: true,
       code: false,
       codeId: [],
-      start: 0,
+      start: "",
       end: 0
     };
   },
@@ -155,6 +145,9 @@ export default {
   },
   mounted() {},
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     toCreateModule(id) {
       this.$router.push({
         path: "/yiqing-module/survey-content/create-module",
@@ -189,7 +182,7 @@ export default {
           Dialog.confirm({
             message: "确定删除吗？"
           }).then(() => {
-            this.questions[this.start].list.splice(this.end - 1, 1);
+            this.questions[this.start].list.splice(this.end, 1);
             instance.close();
           });
           break;
@@ -199,53 +192,24 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.height-btnl {
-  height: 36px;
-  width: 55%;
-  border-radius: 5%;
-  font-size: 13px;
-}
-.height-btn {
-  height: 34px;
-  border-radius: 5%;
-}
-.container {
-  width: 85%;
-}
-.task-home {
-  width: 100%;
-}
-.mar-top {
-  margin-top: 20px;
-}
-.task {
-  width: 100%;
-}
-.task-if {
-  width: 100%;
-}
-input {
-  width: 100%;
-  margin-top: 5px;
-  font-size: 15px;
-}
-.task-question {
-  width: 100%;
-  height: auto;
-  font-size: 15px;
-}
-.fix {
-  border-top: 2px solid rgb(243, 241, 241);
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  background-color: #fff;
-}
-.fixed {
-  width: 100%;
-  position: fixed;
+.s-container {
+  width: 93%;
   height: 100%;
-  top: 510px;
+  margin-top: 5%;
+}
+.s-question {
+  font-size: 14px;
+  color: #5c5858;
+}
+.s-content {
+  font-size: 13px;
+  height: auto;
+  color: #a1998e;
+}
+.s-card {
+  border: 1px solid rgb(236, 229, 229);
+  margin-top: 2%;
+  padding-top: 1%;
+  padding-left: 2%;
 }
 </style>

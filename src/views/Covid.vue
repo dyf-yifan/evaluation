@@ -1,6 +1,9 @@
 <!-- 新型冠状病毒防治统一考试 -->
 <template>
   <div>
+    <div class="back">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <img :src="require('../assets/test.png')" class="test-img" />
     <div class="task-home mar">
       <div class="task">
@@ -95,6 +98,9 @@ export default {
   },
 
   methods: {
+    goBack() {
+      window.history.go(-1);
+    },
     getCovid() {
       this.axios({
         method: "POST",

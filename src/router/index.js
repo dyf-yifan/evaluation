@@ -24,7 +24,7 @@ const routes = [
     component: () => import("../views/YiQingModule.vue")
   },
   {
-    path: "/yiqing-module/module-search",
+    path: "/module-search",
     name: "ModuleSearch",
     component: () => import("../views/ModuleSearch.vue")
   },

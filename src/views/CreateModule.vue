@@ -1,6 +1,8 @@
 <template>
   <div class="conteiner">
-    <i class="iconfont" @click="goBack()">&#xe609;</i>
+    <div class="back blue-color">
+      <i class="iconfont" @click="goBack()">&#xe609;</i>
+    </div>
     <div class="c-container mar">
       <div class="c-title">项目标题</div>
       <div class="c-huanl c-l">
@@ -89,13 +91,6 @@
           <div class="edit-question">
             {{ this.tem.question }}
           </div>
-          <!-- <div
-            class="edit-answer"
-            v-for="(item, index) in this.tem.list"
-            :key="index"
-          >
-            <input v-model="tem.list[index].content" type="text" />
-          </div> -->
 
           <van-cell-group v-for="(item, index) in this.tem.list" :key="index">
             <van-field
@@ -103,10 +98,10 @@
               placeholder="请输入问题选项"
             />
           </van-cell-group>
-        </div>
-        <div class="edit-xuan">
-          <div><i class="iconfont" @click="add()">&#xe657;</i> 选项</div>
-          <div><i class="iconfont">&#xe661;</i> 批量增加</div>
+          <div class="edit-xuan">
+            <div><i class="iconfont" @click="add()">&#xe657;</i> 选项</div>
+            <div><i class="iconfont">&#xe661;</i> 批量增加</div>
+          </div>
         </div>
       </div>
 
@@ -162,21 +157,35 @@ export default {
       this.tem = this.question[index];
       this.temIndex = index;
     },
-    onClickShow() {
-      console.log("开启");
-      this.show = true;
-    },
-
-    onClickHide() {
-      this.show = false;
-      console.log("关闭");
-    },
-
-    noop() {},
     // 成功提示
     toSuccessTip() {
-      this.$toast.success({
-        message: "发布成功"
+      this.axios({
+        method: "POST",
+        url: "http://localhost:8080/api/user/phone",
+        headers: {
+          "Content-Type": "Access-Control-Allow-Origin"
+        },
+        params: {
+          phone: this.tel,
+          verifyCode: this.sms
+        }
+      }).then(res => {
+        let verify = res.data.code;
+        if (verify === 1) {
+          this.$router.push({
+            path: "/my-project",
+            query: { id: res.data.data.userId }
+          });
+        } else {
+          this.$toast({
+            message: res.data.msg,
+            position: "middle"
+          });
+        }
+      });
+      this.$router.push({
+        path: "/yiqing-module/survey-content/login-site",
+        query: { score: this.score }
       });
     },
 
