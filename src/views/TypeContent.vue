@@ -1,21 +1,22 @@
 <template>
   <div class="container mar">
     <i class="iconfont" @click="goBack()">&#xe609;</i>
-    <div class="task-home">
+    <div>
       <div
-        class="task mar-top"
+        class="task-home mar"
         v-for="(type, index1) in questions"
         :key="index1"
       >
         <div class="task-if" v-if="type.status == 0" v-show="index1 == index">
           <div class="task-question">{{ type.question }}</div>
           <div
-            class="task-content"
+            class="task-answer"
             v-for="(choice, index2) in type.list"
             :key="index2"
           >
             <input
               type="radio"
+              class="inputl"
               :name="type.homeTypeId"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
@@ -25,9 +26,14 @@
         <div class="task-if" v-if="type.status == 1" v-show="index1 == index">
           <div class="task-question">{{ type.question }}</div>
 
-          <div v-for="(choice, index2) in type.list" :key="index2">
+          <div
+            class="task-answer"
+            v-for="(choice, index2) in type.list"
+            :key="index2"
+          >
             <input
               type="radio"
+              class="inputl"
               :name="type.homeTypeId"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
@@ -37,17 +43,28 @@
         <div class="task-if" v-if="type.status == 2" v-show="index1 == index">
           <div class="task-question">{{ type.question }}</div>
 
-          <div v-for="(choice, index2) in type.list" :key="index2">
-            <input type="checkBox" :value="choice.homeChoiceId" />{{
-              choice.content
-            }}
+          <div
+            class="task-answer"
+            v-for="(choice, index2) in type.list"
+            :key="index2"
+          >
+            <input
+              type="checkBox"
+              class="inputl"
+              :value="choice.homeChoiceId"
+            />{{ choice.content }}
           </div>
         </div>
         <div class="task-if" v-if="type.status == 3" v-show="index1 == index">
           <div class="task-question">{{ type.question }}</div>
-          <div v-for="(choice, index2) in type.list" :key="index2">
+          <div
+            class="task-answer"
+            v-for="(choice, index2) in type.list"
+            :key="index2"
+          >
             <input
               type="radio"
+              class="inputl"
               :name="type.homeTypeId"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
@@ -55,9 +72,22 @@
         </div>
       </div>
     </div>
-    <button @click="top()" v-show="front">上一页</button>
-    <button @click="nest()" v-show="behind">下一页</button>
-    <button @click="getCode()" v-show="code">提交</button>
+    <div class="df-centerlll">
+      <van-button type="info" plain class="c-btn" @click="top()" v-show="front"
+        >上一页</van-button
+      >
+      <van-button type="info" class="c-btn" @click="nest()" v-show="behind"
+        >下一页</van-button
+      >
+      <van-button
+        color="linear-gradient(to right, #4bb0ff, #6149f6)"
+        type="info"
+        class="c-btn"
+        @click="getResult()"
+        v-show="code"
+        >提交</van-button
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -139,35 +169,29 @@ export default {
       this.getResult();
     },
     getResult() {
-      alert("成绩请到教务处查询");
+      let tem = [];
+      for (let i = 0; i < this.codeId.length; i++) {
+        let arr = this.codeId[i];
+        if (Array.isArray(arr)) {
+          for (let j = 0; i < arr.length; i++) {
+            tem.push(arr[j]);
+          }
+        } else {
+          tem.push(arr);
+        }
+      }
+      this.axios
+        .post("http://120.26.70.42:8080/api/homeChoice/result", tem)
+        .then(res => {
+          this.score = res.data.data;
+          console.log(this.score);
+          this.$router.push({
+            path: "/type-content/commit",
+            query: { score: this.score }
+          });
+        });
     }
   }
 };
 </script>
-<style lang="scss" scoped>
-.container {
-  width: 95%;
-}
-.task-home {
-  width: 100%;
-}
-.mar-top {
-  margin-top: 20px;
-}
-.task {
-  width: 100%;
-}
-.task-if {
-  width: 100%;
-}
-input {
-  width: 100%;
-  margin-top: 5px;
-  border: 1px solid red;
-  font-size: 15px;
-}
-.task-question {
-  width: 100%;
-  font-size: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

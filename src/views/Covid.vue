@@ -175,7 +175,6 @@ export default {
       this.axios
         .post("http://120.26.70.42:8080/api/homeChoice/result", tem)
         .then(res => {
-          // alert(res.data.data);
           this.score = res.data.data;
           console.log(this.score);
           this.$router.push({
@@ -187,50 +186,4 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.test-img {
-  width: 100%;
-  height: 190px;
-}
-.task-home {
-  width: 90%;
-  height: auto;
-}
-.task {
-  width: 100%;
-  height: auto;
-}
-.task-question {
-  margin-top: 5%;
-  font-size: 16px;
-}
-.task-answer {
-  font-size: 14px;
-  border: 0.5px solid #e8e8e8;
-  margin-top: 2.5%;
-  padding-top: 2.5%;
-  padding-bottom: 2.5%;
-  border-radius: 1%;
-  padding-left: 3%;
-}
-.inputl {
-  width: 20px;
-  height: 15px;
-  background-color: #000;
-  border-radius: 50%;
-  position: relative;
-}
-.inputl:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 50%;
-  transition: 0.3s ease;
-}
-.c-btn {
-  margin-top: 8%;
-  height: 32px;
-  width: 30%;
-  border-radius: 2px;
-}
-</style>
+<style lang="scss" scoped></style>

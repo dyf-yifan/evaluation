@@ -19,10 +19,9 @@
     <div class="content">
       <div class="content-top mar df-center">
         <div class="all df-centerl">- 全部 -</div>
-        <router-link to="/search" class="a-style af">
-          <i class="iconfont">&#xe617;</i>
-          <span class="search-left">搜索</span>
-        </router-link>
+        <van-button type="default" to="/search" class="af">
+          <i class="iconfont">&#xe617;</i>搜索
+        </van-button>
       </div>
     </div>
     <div
@@ -33,7 +32,7 @@
       v-bind:style="{
         backgroundImage: 'url(' + item.img + ')',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: '100%'
       }"
     >
       <div class="img-z white-color">
@@ -110,7 +109,14 @@ export default {
   border-radius: 20px;
 }
 .af {
-  margin-left: 10%;
+  width: 30%;
+  height: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6b6a6a;
+  padding-bottom: 1%;
 }
 .my-swipe .van-swipe-item {
   color: #fff;
@@ -130,7 +136,7 @@ export default {
 .all {
   width: 30%;
   height: 80%;
-  font-size: 18px;
+  font-size: 17px;
   color: #828282;
 }
 .search {
