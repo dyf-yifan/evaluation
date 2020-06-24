@@ -31,9 +31,9 @@
               <div class="xuanl" @click="under(index1)">
                 <i class="iconfont">&#xe619;</i> 下移
               </div>
-              <div class="xuanl" @click="top(index1)">
+              <!-- <div class="xuanl" @click="top(index1)">
                 <i class="iconfont">&#xe631;</i> 新增
-              </div>
+              </div> -->
               <div class="xuanl" @click="remove(index1)">
                 <i class="iconfont">&#xe603;</i> 删除
               </div>
@@ -159,7 +159,7 @@ export default {
     toSuccessTip() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/user/phone",
+        url: "http://120.26.70.42:8080/api/user/phone",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },

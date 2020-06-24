@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="search-top">
-      <img class="search-img" :src="require('../assets/sousuo.png')" alt="" />
+      <!-- <img class="search-img" :src="require('../assets/sousuo.png')" alt="" /> -->
       <input
         v-model="keywords"
         type="text"

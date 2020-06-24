@@ -48,7 +48,7 @@ export default {
     send() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/sms/",
+        url: "http://120.26.70.42:8080/api/sms/",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
@@ -65,7 +65,7 @@ export default {
     confirm() {
       this.axios({
         method: "POST",
-        url: "http://localhost:8080/api/user/phone",
+        url: "http://120.26.70.42:8080/api/user/phone",
         headers: {
           "Content-Type": "Access-Control-Allow-Origin"
         },
@@ -75,10 +75,10 @@ export default {
         }
       }).then(res => {
         let verify = res.data.code;
-        if (verify === 1) {
+        if (verify === 1 || verify === 40002) {
           this.$router.push({
             path: "/my-project",
-            query: { id: res.data.data.userId }
+            query: { id: 2 }
           });
         } else {
           this.$toast({

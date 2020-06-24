@@ -4,15 +4,12 @@
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
       <router-link to="/covid">
         <van-swipe-item>
-          <img
-            src="https://cdn1.wenjuan.com/5e342724a320fc092a7707e9_lib_thumbnail_1580486452.png"
-            class="swipe-imgl"
-          />
+          <img :src="require('../assets/1.jpg')" class="swipe-img" />
         </van-swipe-item>
       </router-link>
       <router-link to="/yiqing-module">
         <van-swipe-item>
-          <img :src="require('../assets/img2.jpg')" class="swipe-img"
+          <img :src="require('../assets/2.jpg')" class="swipe-img"
         /></van-swipe-item>
       </router-link>
     </van-swipe>
@@ -36,8 +33,8 @@
       }"
     >
       <div class="img-z white-color">
-        <div class="title">{{ item.title }}</div>
         <div class="part">{{ item.participate }}人参与了</div>
+        <div class="title">{{ item.title }}</div>
       </div>
     </div>
   </div>
@@ -60,9 +57,18 @@ export default {
 
   created() {
     this.getLists();
+    this.toLoading();
   },
 
   methods: {
+    toLoading() {
+      this.$toast.loading({
+        mask: true,
+        message: "加载中...",
+        duration: 8000
+      });
+    },
+
     goBack() {
       window.history.go(-1);
     },
@@ -111,13 +117,13 @@ export default {
 .my-swipe .van-swipe-item {
   color: #fff;
   font-size: 20px;
-  height: 180px;
+  height: 175px;
   text-align: center;
   background-color: #39a9ed;
 }
 .swipe-img {
   width: 100%;
-  height: 180px;
+  height: 175px;
 }
 .content {
   width: 95%;
@@ -136,7 +142,7 @@ export default {
   border-radius: 20px;
 }
 .content-card {
-  height: 126px;
+  height: 120px;
   margin-top: 3%;
   margin-bottom: 3%;
   width: 90%;
@@ -154,11 +160,12 @@ export default {
 .part {
   width: 100%;
   height: 30%;
+  margin-top: 2px;
   font-size: 12px;
 }
 .title {
   width: 100%;
   height: 70%;
-  font-size: 17px;
+  font-size: 16.5px;
 }
 </style>

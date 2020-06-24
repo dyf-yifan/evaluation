@@ -16,7 +16,7 @@
             <input
               type="radio"
               class="inputl"
-              :name="type.homeTypeId"
+              :name="type.one_id"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
           </div>
@@ -33,7 +33,7 @@
             <input
               type="radio"
               class="inputl"
-              :name="type.homeTypeId"
+              :name="type.one_id"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
           </div>
@@ -64,7 +64,7 @@
             <input
               type="radio"
               class="inputl"
-              :name="type.homeTypeId"
+              :name="type.one_id"
               :value="choice.homeChoiceId"
             />{{ choice.content }}
           </div>
@@ -111,9 +111,6 @@ export default {
   },
   mounted() {},
   methods: {
-    goBack() {
-      window.history.go(-1);
-    },
     getListsContent() {
       this.axios({
         method: "POST",
@@ -124,6 +121,7 @@ export default {
         params: {}
       }).then(res => {
         this.listsContent = res.data.data;
+        console.log(this.listsContent);
         this.question = this.listsContent.oneList;
         for (let i = 0; i < this.question.length; i++) {
           let start = JSON.stringify(this.question[i].question);

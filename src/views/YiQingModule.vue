@@ -1,11 +1,7 @@
 <!-- 疫情防控专题模板 -->
 <template>
   <div class="containerl" id="capture">
-    <img
-      class="module-img"
-      :src="require('../assets/banner_plague.png')"
-      alt="mkjn"
-    />
+    <img class="module-img" :src="require('../assets/2.jpg')" alt="mkjn" />
     <div class="fenxiang-img">
       <a href="javascript:void(0)" @click="share()"
         ><img
@@ -94,9 +90,17 @@ export default {
   created() {
     this.getModule();
     // this.getQrCode();
+    this.toLoading();
   },
 
   methods: {
+    toLoading() {
+      this.$toast.loading({
+        mask: true,
+        message: "加载中...",
+        duration: 13000
+      });
+    },
     toModuleSearch() {
       this.$router.push({
         path: "/module-search"
@@ -364,7 +368,6 @@ export default {
   padding-left: 2%;
 }
 .module-btn {
-  // height: 80%;
   font-size: 12px;
   background-color: #fff;
   border: 1px solid rgb(108, 169, 230);

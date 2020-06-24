@@ -207,8 +207,7 @@
     display: flex;
     color: #1E90FF;
     justify-content: space-around;
-    /* border-bottom: 1px solid #cfcfcf; */
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .test-img {

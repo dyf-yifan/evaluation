@@ -5,7 +5,7 @@
       <i class="iconfont" @click="goBack()">&#xe609;返回</i>
     </div> -->
     <div class="search-top">
-      <img class="search-img" :src="require('../assets/sousuo.png')" alt="" />
+      <!-- <img class="search-img" :src="require('../assets/sousuo.png')" alt="" /> -->
       <input
         v-model="keywords"
         type="text"
@@ -20,6 +20,7 @@
 
     <div
       class="search-content mar"
+      @click="toListContent(item.list_id)"
       v-for="(item, index) in searchList"
       :key="index"
     >
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       keywords: "",
+      id: this.$route.query.id,
       searchList: [],
       searchListLenght: "",
       searchListShow: false
@@ -51,6 +53,12 @@ export default {
     }
   },
   methods: {
+    toListContent(listId) {
+      this.$router.push({
+        path: "/type-content",
+        query: { id: listId }
+      });
+    },
     goBack() {
       window.history.go(-1);
     },
